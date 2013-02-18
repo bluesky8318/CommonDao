@@ -225,7 +225,7 @@ public class DefaultCommonDaoTest {
 	}
 
 	/**
-	 * Test method for {@link cn.org.zeronote.orm.dao.DefaultCommonDao#batchUpdate(java.lang.Class, T[])}.
+	 * Test method for {@link cn.org.zeronote.orm.dao.DefaultCommonDao#batchUpdateByLogic(java.lang.Class, T[])}.
 	 */
 	@Test
 	public void testBatchUpdateClassOfTTArray() {

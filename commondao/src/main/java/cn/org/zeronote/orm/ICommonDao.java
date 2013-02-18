@@ -258,5 +258,17 @@ public interface ICommonDao {
 	 * @return	各个更新操作对应的更新记录数数组
 	 * @throws DataAccessException
 	 */
-	public <T> int[] batchUpdate(Class<T> pojoType, T... pojos) throws DataAccessException;
+	public <T> int[] batchUpdateByLogic(Class<T> pojoType, T... pojos) throws DataAccessException;
+	
+	/**
+	 * 批量执行多个更新操作
+	 * <br>
+	 * 按照物理主键进行更新
+	 * @param <T>
+	 * @param pojoType	pojo
+	 * @param argsList
+	 * @return	各个更新操作对应的更新记录数数组
+	 * @throws DataAccessException
+	 */
+	public <T> int[] batchUpdateByPhysical(Class<T> pojoType, T... pojos) throws DataAccessException;
 }

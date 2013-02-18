@@ -204,7 +204,7 @@ public class DefaultCommonDao implements ICommonDao {
 	@Override
 	public <T> T queryForSimpObject(String sql, Object[] args, Class<T> requiredType)
 			throws DataAccessException {
-		Object o = query(sql, args, new ScalarHandler());
+		Object o = query(sql, args, new ScalarHandler<Object>());
 		return (T) convertValueToRequiredType(o, requiredType);
 	}
 
@@ -643,7 +643,7 @@ public class DefaultCommonDao implements ICommonDao {
 	 * @see com.ailk.aiip.apps.wasp.collect.common.ICommonDao#batchUpdate(java.lang.Class, java.lang.Object[])
 	 */
 	@Override
-	public <T> int[] batchUpdate(Class<T> pojoType, T... pojos)
+	public <T> int[] batchUpdateByLogic(Class<T> pojoType, T... pojos)
 			throws DataAccessException {
 		if (pojos == null || pojos.length == 0) {
 			return new int[0];
@@ -654,6 +654,50 @@ public class DefaultCommonDao implements ICommonDao {
 			for (T t : pojos) {
 				if ( pojoType.equals(t.getClass())) {
 					SqlUpdGenerator sqlGenerator = new SqlUpdGenerator(t, false);
+					sql = sqlGenerator.getSql();
+					argsList.add(sqlGenerator.getArgs());
+				} else {
+					throw new DataAccessException("Update : The type of inconsistency!");
+				}
+			}
+			if (sql != null) {
+				return batchUpdate(sql, argsList);
+			} else {
+				logger.trace("Not exist sql!");
+				return new int[0];
+			}
+			
+		} catch (IllegalArgumentException e) {
+			logger.error("init update sql error!", e);
+			throw new DataAccessException("init update sql error!", e);
+		} catch (IllegalAccessException e) {
+			logger.error("init update sql error!", e);
+			throw new DataAccessException("init update sql error!", e);
+		} catch (NoSuchFieldException e) {
+			logger.error("init update sql error!", e);
+			throw new DataAccessException("init update sql error!", e);
+		} catch (SecurityException e) {
+			logger.error("init update sql error!", e);
+			throw new DataAccessException("init update sql error!", e);
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see cn.org.zeronote.orm.ICommonDao#batchUpdateByPhysical(java.lang.Class, T[])
+	 */
+	@Override
+	public <T> int[] batchUpdateByPhysical(Class<T> pojoType, T... pojos)
+			throws DataAccessException {
+		if (pojos == null || pojos.length == 0) {
+			return new int[0];
+		}
+		try {
+			String sql = null;
+			List<Object[]> argsList = new ArrayList<Object[]>();
+			for (T t : pojos) {
+				if ( pojoType.equals(t.getClass())) {
+					SqlUpdGenerator sqlGenerator = new SqlUpdGenerator(t, true);
 					sql = sqlGenerator.getSql();
 					argsList.add(sqlGenerator.getArgs());
 				} else {
