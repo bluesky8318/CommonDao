@@ -81,7 +81,7 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.ICommonDao#queryForPaginatedPojoList(java.lang.Class, java.util.Map, com.dajie.framework.orm.RowSelection)
+	 * @see cn.org.zeronote.orm.ICommonDao#queryForPaginatedPojoList(java.lang.Class, java.util.Map, cn.org.zeronote.orm.RowSelection)
 	 */
 	@Override
 	public <T> PaginationSupport<T> queryForPaginatedPojoList(
@@ -142,7 +142,7 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.ICommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
+	 * @see cn.org.zeronote.orm.ICommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
 	 */
 	@Override
 	public <T> List<T> queryForPojoList(Class<T> pojoType, String col, Object[] args, String... requireFields) throws DataAccessException {
@@ -384,7 +384,7 @@ public class DefaultCommonDao implements ICommonDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.ICommonDao#delete(java.lang.Class, java.util.Map)
+	 * @see cn.org.zeronote.orm.ICommonDao#delete(java.lang.Class, java.util.Map)
 	 */
 	@Override
 	public <T> int delete(Class<T> pojoType, Map<String, Object> args)
@@ -413,7 +413,7 @@ public class DefaultCommonDao implements ICommonDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.ICommonDao#deleteByLogic(java.lang.Class, java.lang.Object[])
+	 * @see cn.org.zeronote.orm.ICommonDao#deleteByLogic(java.lang.Class, java.lang.Object[])
 	 */
 	@Override
 	public <T> int deleteByLogic(Class<T> pojoType, Object... args)
@@ -462,7 +462,7 @@ public class DefaultCommonDao implements ICommonDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.ICommonDao#deleteByPhysical(java.lang.Class, java.lang.Object[])
+	 * @see cn.org.zeronote.orm.ICommonDao#deleteByPhysical(java.lang.Class, java.lang.Object[])
 	 */
 	@Override
 	public <T> int deleteByPhysical(Class<T> pojoType, Object... args)

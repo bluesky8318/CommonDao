@@ -43,7 +43,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.generation.GenerationCode#generate(java.lang.String, java.lang.String)
+	 * @see cn.org.zeronote.orm.generation.GenerationCode#generate(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void generate(String pack, String outputFolder) {
@@ -82,9 +82,9 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				.append("package ").append(pack).append(";\n\n")
 				.append("import java.io.Serializable;\n")
 				.append("\n")
-				.append("import com.dajie.framework.orm.ORMAutoAssemble;\n")
-				.append("import com.dajie.framework.orm.ORMColumn;\n")
-				.append("import com.dajie.framework.orm.ORMTable;\n")
+				.append("import cn.org.zeronote.orm.ORMAutoAssemble;\n")
+				.append("import cn.org.zeronote.orm.ORMColumn;\n")
+				.append("import cn.org.zeronote.orm.ORMTable;\n")
 				.append("\n\n")
 				.append("/**\n * Auto Generat Code by system\n *\n */\n")
 				.append("@ORMAutoAssemble\n");

@@ -12,7 +12,7 @@ public interface IGenerationCode {
 
 	/**
 	 * 生成代码
-	 * @param pack	指定生成代码的包名，格式：com.dajie.po
+	 * @param pack	指定生成代码的包名，格式：cn.org.zeronote.po
 	 * @param outputFolder	指定生成代码保存的根路径
 	 */
 	void generate(String pack, String outputFolder);

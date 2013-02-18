@@ -54,7 +54,7 @@ public class BaseRowProcessor implements RowProcessor {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class, java.util.Set)
+	 * @see cn.org.zeronote.orm.dao.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class, java.util.Set)
 	 */
 	@Override
 	public <T> T toBean(ResultSet rs, Class<T> clz, Set<String> requireFields)

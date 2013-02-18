@@ -217,7 +217,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
     }
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#updateByLogic(java.lang.Object[])
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#updateByLogic(java.lang.Object[])
 	 */
 	@Override
 	public int updateByLogic(Object... pojos) throws DataAccessException {
@@ -230,7 +230,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#updateByPhysical(java.lang.Object[])
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#updateByPhysical(java.lang.Object[])
 	 */
 	@Override
 	public int updateByPhysical(Object... pojos) throws DataAccessException {
@@ -240,7 +240,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#deleteByLogic(java.lang.Object[])
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#deleteByLogic(java.lang.Object[])
 	 */
 	@Override
 	public int deleteByLogic(Object... pojos) throws DataAccessException {
@@ -250,7 +250,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#deleteByPhysical(java.lang.Object[])
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#deleteByPhysical(java.lang.Object[])
 	 */
 	@Override
 	public int deleteByPhysical(Object... pojos) throws DataAccessException {
@@ -260,7 +260,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#queryForPojoOne(java.lang.Class, java.util.Map)
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPojoOne(java.lang.Class, java.util.Map)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -329,7 +329,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
 	 */
 	@Override
 	public <T> List<T> queryForPojoList(Class<T> pojoType, String col,
@@ -343,7 +343,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.dajie.framework.orm.dao.DefaultCommonDao#queryForPaginatedPojoList(java.lang.Class, java.util.Map, com.dajie.framework.orm.RowSelection)
+	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPaginatedPojoList(java.lang.Class, java.util.Map, cn.org.zeronote.orm.RowSelection)
 	 */
 	@Override
 	public <T> PaginationSupport<T> queryForPaginatedPojoList(

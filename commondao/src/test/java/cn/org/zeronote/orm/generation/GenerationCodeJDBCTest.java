@@ -34,7 +34,7 @@ public class GenerationCodeJDBCTest {
 	 */
 	@Test
 	public void testGenerate() {
-		generationCodeJDBC.generate("com.dajie.modules.plugin.admin.po", "D:/Test/services");
+		generationCodeJDBC.generate("cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
 	}
 
 }
