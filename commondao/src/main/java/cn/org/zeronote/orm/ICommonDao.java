@@ -78,11 +78,11 @@ public interface ICommonDao {
 	 * @param <T>
 	 * @param pojoType
 	 * @param args
-	 * @param requireFielsd	请求中必须填充的pojo field，如果为空，则全部获取
+	 * @param requireFields	请求中必须填充的pojo field，如果为空，则全部获取
 	 * @return
 	 * @throws DataAccessException
 	 */
-	public <T> List<T> queryForPojoList(Class<T> pojoType, Map<String, Object> args, String... requireFielsd) throws DataAccessException;
+	public <T> List<T> queryForPojoList(Class<T> pojoType, Map<String, Object> args, String... requireFields) throws DataAccessException;
 	
 	/**
 	 * 如果查询返回的结果集只有一列一行，可以用这个方法快捷的得到结果集中的对象，对象类型 与传入的类型必须匹配。
