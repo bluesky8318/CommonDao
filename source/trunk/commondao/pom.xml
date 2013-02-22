@@ -16,6 +16,14 @@
 		<ch.qos-version>1.0.9</ch.qos-version>
 	</properties>
 	
+	<repositories>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<name>oss.sonatype.org</name>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>commons-dbutils</groupId>
@@ -123,5 +131,16 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<name>oss.sonatype.org-releases</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>oss.sonatype.org</id>
+			<name>oss.sonatype.org-snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
