@@ -36,5 +36,21 @@ public class GenerationCodeJDBCTest {
 	public void testGenerate() {
 		generationCodeJDBC.generate("cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
 	}
+	
+	/**
+	 * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
+	 */
+	@Test
+	public void testGeneratePrefix() {
+		generationCodeJDBC.generatePrefix("user_", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
+	}
+	
+	/**
+	 * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
+	 */
+	@Test
+	public void testGenerateTable() {
+		generationCodeJDBC.generateTable("user_notify", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
+	}
 
 }

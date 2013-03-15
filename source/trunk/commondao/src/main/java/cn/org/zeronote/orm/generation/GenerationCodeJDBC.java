@@ -54,6 +54,56 @@ public class GenerationCodeJDBC implements IGenerationCode {
 			logger.error("build source error!", e);
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see cn.org.zeronote.orm.generation.IGenerationCode#generate(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void generatePrefix(String prefix, String pack, String outputFolder) {
+		try {
+			List<Table> tables = gainTables();
+			
+			List<Table> tabs = new ArrayList<Table>();
+			for (Table table : tables) {
+				if (table.getTableName().startsWith(prefix)) {
+					tabs.add(table);
+					logger.info("Generat table:{}", table.getTableName());
+					break;
+				}
+			}
+			if (!tabs.isEmpty()) {
+				buildSource(pack, outputFolder, tabs);
+			}
+		} catch (Exception e) {
+			logger.error("build source error!", e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see cn.org.zeronote.orm.generation.IGenerationCode#generateTable(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void generateTable(String tableName, String pack, String outputFolder) {
+		try {
+			List<Table> tables = gainTables();
+			
+			List<Table> tabs = new ArrayList<Table>();
+			for (Table table : tables) {
+				if (table.getTableName().equals(tableName)) {
+					tabs.add(table);
+					logger.info("Generat table:{}", tableName);
+					break;
+				}
+			}
+			if (!tabs.isEmpty()) {
+				buildSource(pack, outputFolder, tabs);
+			}
+		} catch (Exception e) {
+			logger.error("build source error!", e);
+		}
+	}
 	
 	/**
 	 * 生成代码
