@@ -5,15 +5,15 @@
 	<groupId>cn.org.zeronote</groupId>
 	<artifactId>commondao</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>commondao-orm</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.2.1.RELEASE</org.springframework-version>
-		<org.slf4j-version>1.7.2</org.slf4j-version>
-		<ch.qos-version>1.0.9</ch.qos-version>
+		<org.springframework-version>3.2.2.RELEASE</org.springframework-version>
+		<org.slf4j-version>1.7.3</org.slf4j-version>
+		<ch.qos-version>1.0.10</ch.qos-version>
 	</properties>
 	
 	<repositories>
@@ -29,22 +29,26 @@
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
 			<version>1.5</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- log -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- Test -->
 		<dependency>
@@ -56,7 +60,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.20</version>
+			<version>5.1.24</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
