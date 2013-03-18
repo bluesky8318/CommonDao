@@ -90,7 +90,26 @@ public class BaseRowProcessor implements RowProcessor {
 			fieldsMap = new HashMap<Field, ORMColumn>();
 			fieldsCache.put(clz, fieldsMap);
 			
-			Field[] fields = clz.getDeclaredFields();
+			Field[] fields = null;
+			// class parent
+			Class<?> parentClz = clz;
+			while (!Object.class.equals(parentClz.getSuperclass())) {
+				parentClz = parentClz.getSuperclass();
+				
+				fields = clz.getDeclaredFields();
+				for (Field field : fields) {
+					field.setAccessible(true);
+					ORMColumn ormc = field.getAnnotation(ORMColumn.class);
+					fieldsMap.put(field, ormc);
+					ORMCanUpdate ocu = field.getAnnotation(ORMCanUpdate.class);
+					if (ocu != null) {
+						// 只取一个，并且是最后找到的那个，po里只应该存在一个
+						fieldsCanUpdateCache.put(clz, field);
+					}
+				}
+			}
+			// this class
+			fields = clz.getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
 				ORMColumn ormc = field.getAnnotation(ORMColumn.class);
@@ -101,6 +120,7 @@ public class BaseRowProcessor implements RowProcessor {
 					fieldsCanUpdateCache.put(clz, field);
 				}
 			}
+
 		}
 		
 		for (Field field : fieldsMap.keySet()) {
