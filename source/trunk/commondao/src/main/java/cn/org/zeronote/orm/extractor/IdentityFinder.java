@@ -48,7 +48,7 @@ public class IdentityFinder {
 			if (oc != null && oc.physicalPkFld() && oc.autoIncrement()) {
 				// 找到最后一个自增id
 				QueryRunner qr = new QueryRunner();
-				Object identityVal = qr.query(conn, selectKey.getQuery(), new ScalarHandler());
+				Object identityVal = qr.query(conn, selectKey.getQuery(), new ScalarHandler<Object>());
 				Long identity = NumberUtils.parseNumber(identityVal.toString(), Long.class);
 				
 				field.setAccessible(true);
