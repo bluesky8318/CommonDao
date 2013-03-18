@@ -96,16 +96,11 @@ public class BaseRowProcessor implements RowProcessor {
 			while (!Object.class.equals(parentClz.getSuperclass())) {
 				parentClz = parentClz.getSuperclass();
 				
-				fields = clz.getDeclaredFields();
+				fields = parentClz.getDeclaredFields();
 				for (Field field : fields) {
 					field.setAccessible(true);
 					ORMColumn ormc = field.getAnnotation(ORMColumn.class);
 					fieldsMap.put(field, ormc);
-					ORMCanUpdate ocu = field.getAnnotation(ORMCanUpdate.class);
-					if (ocu != null) {
-						// 只取一个，并且是最后找到的那个，po里只应该存在一个
-						fieldsCanUpdateCache.put(clz, field);
-					}
 				}
 			}
 			// this class
