@@ -15,7 +15,7 @@
 		<org.slf4j-version>1.7.3</org.slf4j-version>
 		<ch.qos-version>1.0.10</ch.qos-version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>oss.sonatype.org</id>
@@ -23,7 +23,7 @@
 			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-dbutils</groupId>
@@ -105,6 +105,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
