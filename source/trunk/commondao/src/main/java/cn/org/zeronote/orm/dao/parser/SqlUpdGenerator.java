@@ -5,6 +5,7 @@ package cn.org.zeronote.orm.dao.parser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,16 +167,19 @@ public class SqlUpdGenerator {
 						upd.append(ormc.value()).append("=?, ");
 					}
 					params.add(val);
-				} else if (!"".equalsIgnoreCase(ormc.defaultValue())) {
-					// 是空，但是有默认值，则设置
+				} else if (!"null".equalsIgnoreCase(ormc.defaultValue())) {
+					// 是null，但是有默认值，则设置
 					switch (ormc.defaultValueScope()) {
 					case ALL:
 					case UPDATE:
-						if (ormc.append()) {
-							upd.append(ormc.value()).append("=").append(ormc.value()).append("||").append(ormc.defaultValue()).append(", ");	// XXX 只适合Oracle，需要方言支持
-						} else {
-							upd.append(ormc.value()).append("=").append(ormc.defaultValue()).append(", ");
-						}
+					    if (ormc.append()) {
+	                        upd.append(ormc.value()).append("=").append(ormc.value()).append("||?, ");  // XXX 只适合Oracle，需要方言支持
+	                    } else {
+	                        upd.append(ormc.value()).append("=?, ");
+	                    }
+					    
+					    Object value = ORMColumn.DEFAULT_DATE.equals(ormc.defaultValue()) ? new Date() : ormc.defaultValue();
+					    params.add(value);
 						break;
 					default:
 						break;
