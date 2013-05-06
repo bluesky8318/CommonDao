@@ -5,6 +5,8 @@ package cn.org.zeronote.orm.dao.parser;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,9 +31,10 @@ public class SqlUpdGeneratorTest {
      * @throws IllegalAccessException 
      * @throws SecurityException 
      * @throws IllegalArgumentException 
+     * @throws ParseException 
      */
     @Test
-    public void testGetSql() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+    public void testGetSql() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ParseException {
         UserPO po = new UserPO();
         po.setId(1L);
         SqlUpdGenerator generator = new SqlUpdGenerator(po, true);

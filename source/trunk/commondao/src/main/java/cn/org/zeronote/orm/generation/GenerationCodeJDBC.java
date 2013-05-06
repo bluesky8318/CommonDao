@@ -162,11 +162,11 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	                        && column.getDef() != null
 	                        ) { // 主键/没有默认值
 	                    // 默认值，当值在单引号内时应被解释为一个字符串（可为 null）
-	                    String val = column.getDef();
+	                    String val = "\"" + column.getDef() + "\"";
 	                    if (column.getClz().equals(Date.class)) {
 	                        val = "ORMColumn.DEFAULT_DATE";
 	                    }
-	                    writeStr.append(", defaultValue=").append("\"").append(val).append("\"");
+	                    writeStr.append(", defaultValue=").append(val);
 	                }
                 }
 				

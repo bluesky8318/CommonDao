@@ -4,6 +4,7 @@
 package cn.org.zeronote.orm.dao.parser;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -97,8 +98,9 @@ public class SqlUpdGenerator {
 	 * @throws IllegalArgumentException 
 	 * @throws SecurityException 
 	 * @throws NoSuchFieldException 
+	 * @throws ParseException 
 	 */
-	private void generate() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	private void generate() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		
 		Class<?> pojoClazz = pojo.getClass();
 		// TABLE
@@ -123,8 +125,9 @@ public class SqlUpdGenerator {
 	 * @param tableName
 	 * @throws IllegalAccessException 
 	 * @throws IllegalArgumentException 
+	 * @throws ParseException 
 	 */
-	private void generate(String tableName) throws IllegalArgumentException, IllegalAccessException {
+	private void generate(String tableName) throws IllegalArgumentException, IllegalAccessException, ParseException {
 
 		Class<?> pojoClazz = pojo.getClass();
 		StringBuilder upd = new StringBuilder("UPDATE ");
@@ -178,8 +181,8 @@ public class SqlUpdGenerator {
 	                        upd.append(ormc.value()).append("=?, ");
 	                    }
 					    
-					    Object value = ORMColumn.DEFAULT_DATE.equals(ormc.defaultValue()) ? new Date() : ormc.defaultValue();
-					    params.add(value);
+				        Object value = ORMColumn.DEFAULT_DATE.equals(ormc.defaultValue()) ? new Date() : ValueUtils.conversionType(ormc.defaultValue(), field.getType());
+                        params.add(value);
 						break;
 					default:
 						break;
@@ -217,8 +220,9 @@ public class SqlUpdGenerator {
 	 * @throws IllegalArgumentException 
 	 * @throws SecurityException 
 	 * @throws NoSuchFieldException 
+	 * @throws ParseException 
 	 */
-	public String getSql() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public String getSql() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		if (sql == null) {
 			generate();
 		}
@@ -231,8 +235,9 @@ public class SqlUpdGenerator {
 	 * @throws IllegalArgumentException 
 	 * @throws SecurityException 
 	 * @throws NoSuchFieldException 
+	 * @throws ParseException 
 	 */
-	public Object[] getArgs() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public Object[] getArgs() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		if (args == null) {
 			generate();
 		}

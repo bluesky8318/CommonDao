@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.org.zeronote.orm.dao.DefaultCommonDao;
 import cn.org.zeronote.orm.testpo.ActiveDevicePO;
+import cn.org.zeronote.orm.testpo.UserInfoPO;
 import cn.org.zeronote.orm.testpo.UserNotifyPO;
 import cn.org.zeronote.orm.testpo.UserPO;
 
@@ -144,7 +144,11 @@ public class DefaultCommonDaoTest {
 	 */
 	@Test
 	public void testUpdateByPhysical() {
-		
+	    UserInfoPO pojo = new UserInfoPO();
+	    pojo.setPkId(2L);
+	    pojo.setEmail("abc@email.com");
+		dao.updateByPhysical(pojo);
+		System.out.println("fin");
 	}
 
 	/**

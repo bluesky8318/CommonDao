@@ -5,6 +5,7 @@ package cn.org.zeronote.orm.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -284,7 +285,10 @@ public class DefaultCommonDao implements ICommonDao {
 			} catch (SecurityException e) {
 				logger.error("init update sql error! exec number : {}", r, e);
 				throw new DataAccessException("init update sql error!", e);
-			}
+			} catch (ParseException e) {
+			    logger.error("init update sql error! exec number : {}", r, e);
+                throw new DataAccessException("init update sql error!", e);
+            }
 		}
 		return r;
 	}
@@ -312,7 +316,10 @@ public class DefaultCommonDao implements ICommonDao {
 			} catch (SecurityException e) {
 				logger.error("init update sql error! exec number : {}", r, e);
 				throw new DataAccessException("init update sql error!", e);
-			}
+			} catch (ParseException e) {
+			    logger.error("init update sql error! exec number : {}", r, e);
+                throw new DataAccessException("init update sql error!", e);
+            }
 		}
 		return r;
 	}
@@ -679,7 +686,10 @@ public class DefaultCommonDao implements ICommonDao {
 		} catch (SecurityException e) {
 			logger.error("init update sql error!", e);
 			throw new DataAccessException("init update sql error!", e);
-		}
+		} catch (ParseException e) {
+		    logger.error("init update sql error!", e);
+            throw new DataAccessException("init update sql error!", e);
+        }
 	}
 	
 	/*
@@ -723,7 +733,10 @@ public class DefaultCommonDao implements ICommonDao {
 		} catch (SecurityException e) {
 			logger.error("init update sql error!", e);
 			throw new DataAccessException("init update sql error!", e);
-		}
+		} catch (ParseException e) {
+		    logger.error("init update sql error!", e);
+            throw new DataAccessException("init update sql error!", e);
+        }
 	}
 	
 	/**
