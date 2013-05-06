@@ -46,10 +46,10 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	 * @see cn.org.zeronote.orm.generation.GenerationCode#generate(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void generate(String pack, String outputFolder) {
+	public void generate(String pack, String outputFolder, boolean useDefault) {
 		try {
 			List<Table> tables = gainTables();
-			buildSource(pack, outputFolder, tables);
+			buildSource(pack, outputFolder, tables, useDefault);
 		} catch (Exception e) {
 			logger.error("build source error!", e);
 		}
@@ -60,7 +60,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	 * @see cn.org.zeronote.orm.generation.IGenerationCode#generate(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void generatePrefix(String prefix, String pack, String outputFolder) {
+	public void generatePrefix(String prefix, String pack, String outputFolder, boolean useDefault) {
 		try {
 			List<Table> tables = gainTables();
 			
@@ -73,7 +73,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				}
 			}
 			if (!tabs.isEmpty()) {
-				buildSource(pack, outputFolder, tabs);
+				buildSource(pack, outputFolder, tabs, useDefault);
 			}
 		} catch (Exception e) {
 			logger.error("build source error!", e);
@@ -85,7 +85,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	 * @see cn.org.zeronote.orm.generation.IGenerationCode#generateTable(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void generateTable(String tableName, String pack, String outputFolder) {
+	public void generateTable(String tableName, String pack, String outputFolder, boolean useDefault) {
 		try {
 			List<Table> tables = gainTables();
 			
@@ -98,7 +98,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				}
 			}
 			if (!tabs.isEmpty()) {
-				buildSource(pack, outputFolder, tabs);
+				buildSource(pack, outputFolder, tabs, useDefault);
 			}
 		} catch (Exception e) {
 			logger.error("build source error!", e);
@@ -112,7 +112,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	 * @param tables
 	 * @throws IOException 
 	 */
-	private void buildSource(String pack, String outputFolder, List<Table> tables) throws IOException {
+	private void buildSource(String pack, String outputFolder, List<Table> tables, boolean useDefault) throws IOException {
 		String sepa = File.separator;
 		if (sepa.equalsIgnoreCase("\\")) {
 			sepa = "\\\\";
@@ -155,23 +155,21 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				if (column.isAutoIncrement()) {
 					writeStr.append(", autoIncrement = true");
 				}
-				if (!column.isNullable() && !column.isPrimaryKey()) {
-					String val = null;
-					if (column.getClz().equals(Integer.class)) {
-						val = "\"0\"";
-					} else if (column.getClz().equals(Long.class)) {
-						val = "\"0\"";
-					} else if (column.getClz().equals(Double.class)) {
-						val = "\"0\"";
-					} else if (column.getClz().equals(Float.class)) {
-						val = "\"0\"";
-					} else if (column.getClz().equals(Date.class)) {
-						val = "ORMColumn.DEFAULT_DATE";
-					} else {
-						val = "\"\"";
-					}
-					writeStr.append(", defaultValue=").append(val).append("");
-				}
+				
+				if (useDefault) {
+                    // 是否生成默认值
+				    if (!column.isPrimaryKey() 
+	                        && column.getDef() != null
+	                        ) { // 主键/没有默认值
+	                    // 默认值，当值在单引号内时应被解释为一个字符串（可为 null）
+	                    String val = column.getDef();
+	                    if (column.getClz().equals(Date.class)) {
+	                        val = "ORMColumn.DEFAULT_DATE";
+	                    }
+	                    writeStr.append(", defaultValue=").append("\"").append(val).append("\"");
+	                }
+                }
+				
 				writeStr.append(")\n");
 				writeStr.append("\t")
 					.append("private ").append(column.getClz().getName()).append(" ").append(toBeanName(column.getName(), false)).append(";\n")

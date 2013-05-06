@@ -22,7 +22,7 @@ public class Column {
 	private boolean autoIncrement;
 	
 	/** 默认值 */
-	private String def;	// XXX 未使用
+	private String def;
 	
 	/**
 	 * 

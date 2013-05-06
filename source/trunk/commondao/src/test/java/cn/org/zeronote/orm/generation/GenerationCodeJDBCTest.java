@@ -34,23 +34,53 @@ public class GenerationCodeJDBCTest {
 	 */
 	@Test
 	public void testGenerate() {
-		generationCodeJDBC.generate("cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
+	    boolean useDefault = false;
+		generationCodeJDBC.generate("cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
 	}
+	
+	/**
+     * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
+     */
+    @Test
+    public void testGenerateUseDefault() {
+        boolean useDefault = true;
+        generationCodeJDBC.generate("cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
+    }
 	
 	/**
 	 * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testGeneratePrefix() {
-		generationCodeJDBC.generatePrefix("user_", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
+	    boolean useDefault = false;
+		generationCodeJDBC.generatePrefix("user_", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
 	}
+	
+	/**
+     * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
+     */
+    @Test
+    public void testGeneratePrefixUseDefault() {
+        boolean useDefault = true;
+        generationCodeJDBC.generatePrefix("user_", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
+    }
 	
 	/**
 	 * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testGenerateTable() {
-		generationCodeJDBC.generateTable("user_notify", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services");
+	    boolean useDefault = false;
+		generationCodeJDBC.generateTable("user_notify", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
 	}
+	
+	/**
+     * Test method for {@link cn.org.zeronote.orm.generation.GenerationCodeJDBC#generate(java.lang.String, java.lang.String)}.
+     */
+    @Test
+    public void testGenerateTableUseDefault() {
+        boolean useDefault = true;
+        generationCodeJDBC.generateTable("user_notify", "cn.org.zeronote.modules.plugin.admin.po", "/Test/services", useDefault);
+    }
 
 }
