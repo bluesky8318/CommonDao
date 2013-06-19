@@ -36,6 +36,10 @@ public class DefaultCommonDaoTest {
 	@Qualifier("dbDao")
 	DefaultCommonDao dao;
 	
+	
+	@Autowired
+	ITransactionalService transactionalService;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -43,6 +47,19 @@ public class DefaultCommonDaoTest {
 	public void setUp() throws Exception {
 	}
 
+	/**
+	 * 测试事务处理
+	 */
+	@Test
+	public void testTransactional() {
+		try {
+			transactionalService.transcationalSomething();
+		} catch (Exception e) {
+			System.out.println("rollback");
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Test method for {@link cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPaginatedPojoList(java.lang.String, java.lang.Object[], java.lang.Class, cn.org.zeronote.orm.RowSelection)}.
 	 */

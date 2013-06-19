@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
 	xsi:schemaLocation="
 			http://www.springframework.org/schema/beans 
 			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 			http://www.springframework.org/schema/context 
-			http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/tx
+    		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    		"
 	default-lazy-init="false">
 	
 	<!-- c3p0 -->
@@ -14,14 +19,17 @@
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://127.0.0.1:3306/businetwork?useUnicode=true&amp;characterEncoding=UTF-8" />
+			value="jdbc:mysql://127.0.0.1:3306/ZERONOTE?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="user" value="root" />
-		<property name="password" value="123456" />
+		<property name="password" value="something" />
 		<property name="maxPoolSize" value="20" />
 		<property name="minPoolSize" value="1" />
 		<property name="initialPoolSize" value="1" />
 		<property name="maxIdleTime" value="20" />
 	</bean>
+
+	<!-- 基于注解的事务处理支持 -->
+	<tx:annotation-driven/>
 	
 	<!-- redis cache pool -->
 	<bean id="jedisCachePoolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -61,4 +69,6 @@
 	<bean class="cn.org.zeronote.orm.generation.GenerationCodeJDBC">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<context:component-scan base-package="cn.org.zeronote.orm.dao" />
 </beans>  
