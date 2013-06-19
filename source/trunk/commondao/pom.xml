@@ -43,6 +43,13 @@
 			<version>${org.springframework-version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework-version}</version>
+            <scope>test</scope>
+        </dependency>
+
 		<!-- log -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
