@@ -53,6 +53,25 @@ public interface ICommonDao {
 	public List<Map<String,Object>> queryForMapList(String sql, Object... args) throws DataAccessException;
 	
 	/**
+	 * 执行带参数的查询得到的结果集转换成一个列表，列表中的每个元素为一个Map，对应原结果集的每条记录。
+	 * <p>
+	 * 结果集的列名对应Map中的key，结果集中的值对应Map中的value。
+	 * <br>
+	 * 参数：
+	 * <br>
+	 * sql:使用":字段名"方式设置参数，冒号与字段名之间不允许有空白，字段名区分大小写，字段名为参数params的map的key值
+	 * <br>
+	 * params:以key/value方式存储sql的参数值
+	 * </p>
+	 *
+	 * @param sql
+	 * @param params
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public List<Map<String,Object>> queryForMapList(String sql, Map<String, Object> params) throws DataAccessException;
+	
+	/**
 	 * 执行带参数查询，将得到的结果集拼装成一个pojo列表，列表中的每一个元素为一个pojo，从原结果集中的记
 	 * 录转换而来。转换的规则是将结果集的列名和pojo的属性名进行匹配（不区分大小写，所以pojo中不能有同名
 	 * 的多个属性），匹配上则将结果集中的这列的值赋给pojo的对应的属性。
@@ -65,6 +84,29 @@ public interface ICommonDao {
 	 * @throws DataAccessException
 	 */
 	public <T> List<T> queryForPojoList(String sql, Object[] args, Class<T> pojoType) throws DataAccessException;
+	
+	/**
+	 * 执行带参数查询，将得到的结果集拼装成一个pojo列表，列表中的每一个元素为一个pojo，从原结果集中的记
+	 * 录转换而来。转换的规则是将结果集的列名和pojo的属性名进行匹配（不区分大小写，所以pojo中不能有同名
+	 * 的多个属性），匹配上则将结果集中的这列的值赋给pojo的对应的属性。
+	 * 默认情况下，clob字段会转换为String类型，而不是保持Clob类型，但是blob字段还是保持为Blob类型或 者InputStream类型。
+	 * 
+	 * <p>
+	 * 参数：
+	 * <br>
+	 * sql:使用":字段名"方式设置参数，冒号与字段名之间不允许有空白，字段名区分大小写，字段名为参数params的map的key值
+	 * <br>
+	 * params:以key/value方式存储sql的参数值
+	 * </p>
+	 * 
+	 * @param <T>
+	 * @param sql
+	 * @param params
+	 * @param pojoType
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public <T> List<T> queryForPojoList(String sql, Map<String, Object> params, Class<T> pojoType) throws DataAccessException;
 	
 	
 	/**
