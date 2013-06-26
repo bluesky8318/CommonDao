@@ -29,6 +29,7 @@ import cn.org.zeronote.orm.PaginationSupport;
 import cn.org.zeronote.orm.RowSelection;
 import cn.org.zeronote.orm.dao.dialect.SqlRepairer;
 import cn.org.zeronote.orm.dao.dialect.SqlRepairer.DBType;
+import cn.org.zeronote.orm.dao.parser.ParamTransformGenerator;
 import cn.org.zeronote.orm.dao.parser.SqlDelGenerator;
 import cn.org.zeronote.orm.dao.parser.SqlInsGenerator;
 import cn.org.zeronote.orm.dao.parser.SqlSelGenerator;
@@ -117,6 +118,22 @@ public class DefaultCommonDao implements ICommonDao {
 			throws DataAccessException {
 		return (List<Map<String, Object>>) query(sql, args, new MapListResultSetExtractor());
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see cn.org.zeronote.orm.ICommonDao#queryForMapList(java.lang.String, java.util.Map)
+	 */
+	@Override
+	public List<Map<String, Object>> queryForMapList(String sql, Map<String, Object> params) 
+			throws DataAccessException {
+		logger.debug("Query Ora SQL:{}", sql);
+		// SQL变换
+		ParamTransformGenerator generator = new ParamTransformGenerator(sql, params);
+		generator.generate();
+		String sql2 = generator.getSql();	// 将:字段名方式，整理成?方式
+		Object[] args = generator.getArgs();
+		return queryForMapList(sql2, args);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.ailk.aiip.apps.wasp.collect.common.ICommonDao#queryForPojoList(java.lang.String, java.lang.Object[], java.lang.Class)
@@ -127,6 +144,22 @@ public class DefaultCommonDao implements ICommonDao {
 		return (List<T>) query(sql, args, new PojoListResultSetExtractor<T>(pojoType));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see cn.org.zeronote.orm.ICommonDao#queryForPojoList(java.lang.String, java.util.Map, java.lang.Class)
+	 */
+	@Override
+	public <T> List<T> queryForPojoList(String sql, Map<String, Object> params,
+			Class<T> pojoType) throws DataAccessException {
+		logger.debug("Query Ora SQL:{}", sql);
+		// SQL变换
+		ParamTransformGenerator generator = new ParamTransformGenerator(sql, params);
+		generator.generate();
+		String sql2 = generator.getSql();	// 将:字段名方式，整理成?方式
+		Object[] args = generator.getArgs();
+		return queryForPojoList(sql2, args, pojoType);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.ailk.aiip.apps.wasp.collect.common.ICommonDao#queryForPojoList(java.lang.Class, java.lang.Object[])
 	 */

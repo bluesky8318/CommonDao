@@ -20,7 +20,7 @@ import cn.org.zeronote.orm.ORMTable;
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
-public class SqlSelGenerator {
+public class SqlSelGenerator implements Generator {
 
 	/** orm fields cache*/
 	private transient static Map<Class<?>, Map<Field, ORMColumn>> fieldsCache = new HashMap<Class<?>, Map<Field,ORMColumn>>();

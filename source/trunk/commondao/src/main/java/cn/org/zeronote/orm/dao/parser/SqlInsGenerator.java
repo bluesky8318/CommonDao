@@ -21,7 +21,7 @@ import cn.org.zeronote.orm.ORMTable;
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
-public class SqlInsGenerator {
+public class SqlInsGenerator implements Generator {
 	
 	private static Logger logger = LoggerFactory.getLogger(SqlInsGenerator.class);
 	

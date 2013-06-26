@@ -19,7 +19,7 @@ import cn.org.zeronote.orm.ORMTable;
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
-public class SqlSelHashGenerator extends SqlSelGenerator{
+public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 	
 	private List<String> sqls;
 	private List<Object[]> argsObjs;

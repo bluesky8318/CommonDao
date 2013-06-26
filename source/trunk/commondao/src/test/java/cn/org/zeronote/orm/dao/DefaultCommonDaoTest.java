@@ -80,6 +80,19 @@ public class DefaultCommonDaoTest {
 	}
 
 	/**
+	 * Test method for {@link cn.org.zeronote.orm.dao.DefaultCommonDao#queryForMapList(java.lang.String, java.util.Map<String, Object>)}.
+	 */
+	@Test
+	public void testQueryForMapListStringMap() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", 1);
+		List<Map<String, Object>> ls = dao.queryForMapList("select * from T_USER  where id = :id", params);
+		for (Map<String, Object> map : ls) {
+			System.out.println(map.get("USER_NAME"));
+		}
+	}
+	
+	/**
 	 * Test method for {@link cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPojoList(java.lang.String, java.lang.Object[], java.lang.Class)}.
 	 */
 	@Test

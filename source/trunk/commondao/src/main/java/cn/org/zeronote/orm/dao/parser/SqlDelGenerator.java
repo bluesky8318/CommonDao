@@ -20,7 +20,7 @@ import cn.org.zeronote.orm.ORMTable;
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
-public class SqlDelGenerator {
+public class SqlDelGenerator implements Generator {
 
 	private Class<?> pojoClazz;
 	private Map<String, Object> delArgs;
