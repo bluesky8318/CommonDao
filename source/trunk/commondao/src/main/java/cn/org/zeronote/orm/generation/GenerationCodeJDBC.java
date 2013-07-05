@@ -74,6 +74,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 			}
 			if (!tabs.isEmpty()) {
 				buildSource(pack, outputFolder, tabs, useDefault);
+			} else {
+				logger.warn("No table have be Generate!");
 			}
 		} catch (Exception e) {
 			logger.error("build source error!", e);
@@ -99,6 +101,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 			}
 			if (!tabs.isEmpty()) {
 				buildSource(pack, outputFolder, tabs, useDefault);
+			} else {
+				logger.warn("No table have be Generate!");
 			}
 		} catch (Exception e) {
 			logger.error("build source error!", e);
