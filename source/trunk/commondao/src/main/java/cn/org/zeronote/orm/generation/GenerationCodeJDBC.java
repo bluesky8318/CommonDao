@@ -344,6 +344,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 		typesMap.put(java.sql.Types.DOUBLE, Double.class);
 		typesMap.put(java.sql.Types.FLOAT, Float.class);
 		typesMap.put(java.sql.Types.INTEGER, Integer.class);
+		typesMap.put(java.sql.Types.SMALLINT, Integer.class);
 		typesMap.put(java.sql.Types.TINYINT, Integer.class);
 		typesMap.put(java.sql.Types.NUMERIC, Number.class);
 		typesMap.put(java.sql.Types.TIME, Date.class);
