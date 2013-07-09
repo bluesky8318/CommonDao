@@ -27,10 +27,7 @@
 		<property name="initialPoolSize" value="1" />
 		<property name="maxIdleTime" value="20" />
 	</bean>
-
-	<!-- 基于注解的事务处理支持 -->
-	<tx:annotation-driven/>
-	
+    
 	<!-- redis cache pool -->
 	<bean id="jedisCachePoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxActive" value="100" />

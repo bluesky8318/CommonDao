@@ -12,11 +12,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.6</java-version>
 		<org.springframework-version>3.2.2.RELEASE</org.springframework-version>
-		<org.slf4j-version>1.7.3</org.slf4j-version>
-		<ch.qos-version>1.0.10</ch.qos-version>
+		<org.slf4j-version>1.7.5</org.slf4j-version>
+		<ch.qos-version>1.0.13</ch.qos-version>
 	</properties>
 
 	<repositories>
+		<repository>
+			<id>java.net</id>
+			<name>java official repository</name>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
 		<repository>
 			<id>oss.sonatype.org</id>
 			<name>oss.sonatype.org</name>
@@ -43,13 +48,60 @@
 			<version>${org.springframework-version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 数据库驱动 -->
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${org.springframework-version}</version>
-            <scope>test</scope>
-        </dependency>
-
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.24</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 标准连接池 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 基于spring的事务处理支持 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- jotm 事务处理支持 -->
+		<dependency>
+			<groupId>org.ow2.jotm</groupId>
+			<artifactId>jotm-core</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ow2.jotm</groupId>
+			<artifactId>jotm-datasource</artifactId>
+			<version>2.2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ow2.cmi</groupId>
+			<artifactId>cmi-all</artifactId>
+			<version>2.0-RC7</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- xapool xa 事务连接池 -->
+		<dependency>
+			<groupId>com.experlog</groupId>
+			<artifactId>xapool</artifactId>
+			<version>1.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- jta spi xa -->
+		<dependency>
+			<groupId>javax.resource</groupId>
+			<artifactId>connector-api</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- log -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -57,19 +109,34 @@
 			<version>${org.slf4j-version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- logger - logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${ch.qos-version}</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Test -->
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.24</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

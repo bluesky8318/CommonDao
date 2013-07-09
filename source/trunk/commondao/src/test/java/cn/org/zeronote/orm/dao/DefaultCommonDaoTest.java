@@ -36,28 +36,11 @@ public class DefaultCommonDaoTest {
 	@Qualifier("dbDao")
 	DefaultCommonDao dao;
 	
-	
-	@Autowired
-	ITransactionalService transactionalService;
-	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	/**
-	 * 测试事务处理
-	 */
-	@Test
-	public void testTransactional() {
-		try {
-			transactionalService.transcationalSomething();
-		} catch (Exception e) {
-			System.out.println("rollback");
-			e.printStackTrace();
-		}
 	}
 	
 	/**
