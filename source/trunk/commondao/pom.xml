@@ -56,6 +56,13 @@
 			<version>${org.springframework-version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 基于spring的事务处理支持(使用JdbcTxCommonDao必须的依赖) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- 数据库驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -68,13 +75,6 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>0.2.23</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- 基于spring的事务处理支持 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- jotm 事务处理支持 -->
