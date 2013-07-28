@@ -14,18 +14,29 @@
     		"
 	default-lazy-init="false">
 	
-	<!-- c3p0 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl"
-			value="jdbc:mysql://127.0.0.1:3306/ZERONOTE?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="root" />
-		<property name="password" value="something" />
-		<property name="maxPoolSize" value="20" />
-		<property name="minPoolSize" value="1" />
-		<property name="initialPoolSize" value="1" />
-		<property name="maxIdleTime" value="20" />
+    <!-- dataSource by druid -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+	    <property name="url" value="jdbc:mysql://127.0.0.1:3306/ZERONOTE?useUnicode=true&amp;characterEncoding=UTF-8" />
+	    <property name="username" value="root" />
+	    <property name="password" value="something" />
+	     
+	    <property name="filters" value="stat" />
+	 
+	    <property name="maxActive" value="20" />
+	    <property name="initialSize" value="1" />
+	    <property name="maxWait" value="60000" />
+	    <property name="minIdle" value="1" />
+	 
+	    <property name="timeBetweenEvictionRunsMillis" value="3000" />
+	    <property name="minEvictableIdleTimeMillis" value="300000" />
+	 
+	    <property name="validationQuery" value="SELECT 'x'" />
+	    <property name="testWhileIdle" value="true" />
+	    <property name="testOnBorrow" value="false" />
+	    <property name="testOnReturn" value="false" />
+	     
+	    <property name="poolPreparedStatements" value="true" />
+	    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 	</bean>
     
 	<!-- redis cache pool -->
