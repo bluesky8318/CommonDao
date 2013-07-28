@@ -36,6 +36,7 @@
 			<version>1.5</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 使用redis必须的依赖 -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -47,6 +48,13 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<!-- 使用JdbcTxCommonDao必须的依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- 数据库驱动 -->
 		<dependency>

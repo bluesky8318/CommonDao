@@ -591,7 +591,7 @@ public class DefaultCommonDao implements ICommonDao {
 		// 这里使用同一个Connection以保证主键获取的成功
 		Connection conn;
 		try {
-			conn = this.dataSource.getConnection();
+			conn = getConnection();
 		} catch (SQLException e) {
 			logger.error("Get connection from datasource error", e);
 			throw new DataAccessException("Get connection from datasource error!", e);
@@ -624,12 +624,10 @@ public class DefaultCommonDao implements ICommonDao {
 				}
 			}
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					throw new DataAccessException("close connection error!", e);
-				}
+			try {
+				close(conn);
+			} catch (SQLException e) {
+				throw new DataAccessException("close connection error!", e);
 			}
 		}
 		return r;
@@ -796,7 +794,7 @@ public class DefaultCommonDao implements ICommonDao {
 	 * @return
 	 * @throws DataAccessException 
 	 */
-	private int execute(String sql, Object[] args) throws DataAccessException {
+	protected int execute(String sql, Object[] args) throws DataAccessException {
 		QueryRunner qr = getQueryRunner();
 		logger.debug("Update SQL:{}", sql);
 		try {
@@ -826,13 +824,34 @@ public class DefaultCommonDao implements ICommonDao {
 	}
 
 	/**
+	 * 获取拼装QueryRunner
 	 * @return the queryRunner
 	 */
-	private QueryRunner getQueryRunner() {
+	protected QueryRunner getQueryRunner() {
 		if (queryRunner == null) {
 			queryRunner = new QueryRunner(dataSource);
 		}
 		return queryRunner;
+	}
+	
+	/**
+	 * 获取连接
+	 * @return
+	 * @throws SQLException
+	 */
+	protected Connection getConnection() throws SQLException {
+		return this.dataSource.getConnection();
+	}
+	
+	/**
+	 * 关闭连接
+	 * @param conn
+	 * @throws SQLException
+	 */
+	protected void close(Connection conn) throws SQLException {
+		if (conn != null && !conn.isClosed()) {
+			conn.close();
+		}
 	}
 
 	/**

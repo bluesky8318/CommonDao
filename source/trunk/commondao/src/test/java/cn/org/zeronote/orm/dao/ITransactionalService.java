@@ -17,4 +17,10 @@ public interface ITransactionalService {
 	 * 当遇到Exception后，事物回滚
 	 */
 	void transcationalSomething() throws Exception;
+	
+	/**
+	 * spring jdbcTemplate 事务处理
+	 * @throws Exception
+	 */
+	void transcationalSomethingTx() throws Exception;
 }
