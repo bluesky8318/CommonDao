@@ -7,11 +7,35 @@
 	<packaging>jar</packaging>
 	<version>1.1.2-SNAPSHOT</version>
 	<name>commondao-orm</name>
+	<description>This a simple orm or dao.</description>
+	<url>https://github.com/bluesky8318/CommonDao</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>bluesky8318</id>
+			<name>leon</name>
+			<email>lizheng8318@gmail.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/bluesky8318/CommonDao</connection>
+		<developerConnection>scm:git:git://github.com/bluesky8318/CommonDao</developerConnection>
+		<url>https://github.com/bluesky8318/CommonDao</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.2.3.RELEASE</org.springframework-version>
+		<org.springframework-version>3.2.4.RELEASE</org.springframework-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<ch.qos-version>1.0.13</ch.qos-version>
 	</properties>
@@ -186,7 +210,7 @@
 				<executions>
 					<execution>
 						<id>attach-sources</id>
-						<phase>compile</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
@@ -199,26 +223,22 @@
 				<version>2.9.1</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<attach>true</attach>
 				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>2.8</version>
-				<executions>
-					<execution>
-						<id>copy</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.directory}/lib
-							</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
