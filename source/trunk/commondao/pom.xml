@@ -4,7 +4,7 @@
 	<groupId>cn.org.zeronote</groupId>
 	<artifactId>commondao</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 	<name>commondao-orm</name>
 	<description>This a simple orm or dao.</description>
 	<url>https://github.com/bluesky8318/CommonDao</url>
