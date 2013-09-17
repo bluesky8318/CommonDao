@@ -26,8 +26,8 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/bluesky8318/CommonDao</connection>
-		<developerConnection>scm:git:git://github.com/bluesky8318/CommonDao</developerConnection>
+		<connection>scm:git:https://github.com/bluesky8318/CommonDao</connection>
+		<developerConnection>scm:git:https://github.com/bluesky8318/CommonDao</developerConnection>
 		<url>https://github.com/bluesky8318/CommonDao</url>
 	  <tag>commondao-1.1.2</tag>
   </scm>
