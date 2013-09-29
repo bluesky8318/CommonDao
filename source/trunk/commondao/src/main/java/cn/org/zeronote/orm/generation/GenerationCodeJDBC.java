@@ -69,7 +69,6 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				if (table.getTableName().startsWith(prefix)) {
 					tabs.add(table);
 					logger.info("Generat table:{}", table.getTableName());
-					break;
 				}
 			}
 			if (!tabs.isEmpty()) {
