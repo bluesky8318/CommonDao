@@ -21,13 +21,17 @@ public class SqlRepairer {
 	 *
 	 */
 	public static enum DBType {
-		MYSQL;
+		/** mysql */
+		MYSQL,
+		/** ms sql server */
+		MSSQL;
 	}
 	
 	/**自增主键查询*/
 	private static Map<DBType, SelectKey> selectKeyMap = new HashMap<DBType, SelectKey>();
 	static {
 		selectKeyMap.put(DBType.MYSQL, new SelectKey("ID", "SELECT @@IDENTITY AS ID"));
+		selectKeyMap.put(DBType.MSSQL, new SelectKey("ID", "SELECT @@IDENTITY AS ID"));
 	}
 	
 	/**
