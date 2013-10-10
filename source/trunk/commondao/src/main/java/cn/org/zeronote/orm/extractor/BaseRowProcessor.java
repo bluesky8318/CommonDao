@@ -36,8 +36,6 @@ public class BaseRowProcessor implements RowProcessor {
 	private boolean clob2String = true;
 	private boolean blob2Obj = false;
 	
-	/**orm映射关系缓存*/
-	private Map<Class<?>, Map<String, Integer[]>> ormCache = new HashMap<Class<?>, Map<String, Integer[]>>();
 	/**orm映射大小写缓存*/
 	private Map<Class<?>, Boolean> ignoreCaseCache = new HashMap<Class<?>, Boolean>();
 	/**fields cache*/
@@ -59,6 +57,7 @@ public class BaseRowProcessor implements RowProcessor {
 	@Override
 	public <T> T toBean(ResultSet rs, Class<T> clz, Set<String> requireFields)
 			throws SQLException {
+		// 映射读取
 		boolean ignoreCase = false;
 		if (ignoreCaseCache.containsKey(clz)) {
 			ignoreCase = ignoreCaseCache.get(clz);
@@ -68,23 +67,15 @@ public class BaseRowProcessor implements RowProcessor {
 			ignoreCaseCache.put(clz, ignoreCase);
 		}
 		
-		Map<String, Integer[]> clList = null;
-		if (ormCache.containsKey(clz)) {
-			// 已有缓存
-			clList = ormCache.get(clz);
-		} else {
-			// 没有缓存
-			clList = new HashMap<String, Integer[]>();
-			for (int j = 1; j <= rs.getMetaData().getColumnCount(); j++) {
-				Integer[] is = new Integer[2];
-				is[0] = j;
-				is[1] = rs.getMetaData().getColumnType(j);
-				clList.put(ignoreCase ? rs.getMetaData().getColumnLabel(j).toLowerCase() : rs.getMetaData().getColumnLabel(j), is);
-			}
-			ormCache.put(clz, clList);
-			
+		// 字段映射
+		Map<String, Integer[]> clList = new HashMap<String, Integer[]>();
+		for (int j = 1; j <= rs.getMetaData().getColumnCount(); j++) {
+			Integer[] is = new Integer[2];
+			is[0] = j;
+			is[1] = rs.getMetaData().getColumnType(j);
+			clList.put(ignoreCase ? rs.getMetaData().getColumnLabel(j).toLowerCase() : rs.getMetaData().getColumnLabel(j), is);
 		}
-		T bean = this.newInstance(clz);
+		
 		Map<Field, ORMColumn> fieldsMap = fieldsCache.get(clz);
 		if (fieldsMap == null) {
 			fieldsMap = new HashMap<Field, ORMColumn>();
@@ -118,12 +109,16 @@ public class BaseRowProcessor implements RowProcessor {
 
 		}
 		
+		// 创建Bean
+		T bean = this.newInstance(clz);
 		for (Field field : fieldsMap.keySet()) {
 			if (requireFields != null && !requireFields.isEmpty() && !requireFields.contains(field.getName())) {
 				continue;
 			}
 			ORMColumn ormc = fieldsMap.get(field);
-			if (ormc != null && clList.keySet().contains(ignoreCase ? ormc.value().toLowerCase() : ormc.value())) {	// metadata中需要有
+			String value = ormc == null ? field.getName() : ormc.value();
+			value = ignoreCase ? value.toLowerCase() : value;
+			if (clList.keySet().contains(value)) {	// metadata中需要有
 				try {
 					Integer[] is = clList.get(ignoreCase ? ormc.value().toLowerCase() : ormc.value());
 					field.set(bean, conversionType(getValue(rs, is[0], is[1], field.getType()), is[1], field.getType()));
