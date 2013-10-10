@@ -774,8 +774,9 @@ public class DefaultCommonDao implements ICommonDao {
 	 * 实际查询
 	 * @param sql
 	 * @param args
+	 * @param resultSetExtractor
 	 * @return
-	 * @throws DataAccessException 
+	 * @throws DataAccessException
 	 */
 	protected <T> T query(String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
 		QueryRunner qr = getQueryRunner();
