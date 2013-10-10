@@ -120,7 +120,7 @@ public class BaseRowProcessor implements RowProcessor {
 			value = ignoreCase ? value.toLowerCase() : value;
 			if (clList.keySet().contains(value)) {	// metadata中需要有
 				try {
-					Integer[] is = clList.get(ignoreCase ? ormc.value().toLowerCase() : ormc.value());
+					Integer[] is = clList.get(value);
 					field.set(bean, conversionType(getValue(rs, is[0], is[1], field.getType()), is[1], field.getType()));
 				} catch (IllegalArgumentException e) {
 					throw new SQLException("Cannot write value: " + field.getName(), e);
