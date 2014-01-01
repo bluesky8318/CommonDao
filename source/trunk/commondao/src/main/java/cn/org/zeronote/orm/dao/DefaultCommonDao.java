@@ -4,6 +4,8 @@
 package cn.org.zeronote.orm.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -78,7 +80,7 @@ public class DefaultCommonDao implements ICommonDao {
 	public <T> PaginationSupport<T> queryForPaginatedPojoList(String sql,
 			Object[] args, Class<T> pojoType, RowSelection rowSelection)
 			throws DataAccessException {
-		return (PaginationSupport<T>) query(sql, args, new PaginationPojoListResultSetExtractor<T>(pojoType, rowSelection));
+		return (PaginationSupport<T>) queryPaginated(sql, args, new PaginationPojoListResultSetExtractor<T>(pojoType, rowSelection));
 	}
 	
 	/*
@@ -789,6 +791,25 @@ public class DefaultCommonDao implements ICommonDao {
 	}
 	
 	/**
+	 * 分页查询
+	 * 与正常查询不一致，需要更多的操作
+	 * @param sql
+	 * @param args
+	 * @param resultSetExtractor
+	 * @return
+	 * @throws DataAccessException
+	 */
+	protected <T> T queryPaginated(String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
+		QueryRunner qr = getPaginatedQueryRunner();
+		logger.debug("Query SQL:{}", sql);
+		try {
+			return qr.query(sql, resultSetExtractor, pearParams(args));
+		} catch (SQLException e) {
+			throw new DataAccessException("Query error!", e);
+		}
+	}
+	
+	/**
 	 * update操作执行
 	 * @param sql
 	 * @param args
@@ -831,6 +852,25 @@ public class DefaultCommonDao implements ICommonDao {
 	protected QueryRunner getQueryRunner() {
 		if (queryRunner == null) {
 			queryRunner = new QueryRunner(dataSource);
+		}
+		return queryRunner;
+	}
+	
+	/**
+	 * 支持游标滚动的查询
+	 * @return
+	 */
+	protected QueryRunner getPaginatedQueryRunner() {
+		if (queryRunner == null) {
+			queryRunner = new QueryRunner(dataSource) {
+
+				@Override
+				protected PreparedStatement prepareStatement(Connection conn,
+						String sql) throws SQLException {
+					return conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				}
+				
+			};
 		}
 		return queryRunner;
 	}
