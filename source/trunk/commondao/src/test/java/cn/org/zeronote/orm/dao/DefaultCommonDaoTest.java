@@ -89,7 +89,7 @@ public class DefaultCommonDaoTest {
 	@Test
 	public void testQueryForPojoListClassOfTMapOfStringObject() {
 		Map<String, Object> args = new HashMap<String, Object>();
-		List<UserPO> users = dao.queryForPojoList(UserPO.class, args, "id");
+		List<UserPO> users = dao.queryForPojoList(UserPO.class, args);
 		for (UserPO po : users) {
 			System.out.println(po.isCanUpdate());
 		}

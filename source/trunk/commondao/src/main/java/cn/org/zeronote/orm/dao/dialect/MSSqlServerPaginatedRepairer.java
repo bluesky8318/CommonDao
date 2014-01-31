@@ -80,7 +80,7 @@ public class MSSqlServerPaginatedRepairer implements IPaginatedRepairer {
 				@Override
 				protected PreparedStatement prepareStatement(Connection conn,
 						String sql) throws SQLException {
-					return conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+					return conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				}
 				
 			};

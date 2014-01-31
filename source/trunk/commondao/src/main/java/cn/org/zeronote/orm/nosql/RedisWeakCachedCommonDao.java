@@ -332,8 +332,7 @@ public class RedisWeakCachedCommonDao extends DefaultCommonDao {
 	 * @see cn.org.zeronote.orm.dao.DefaultCommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
 	 */
 	@Override
-	public <T> List<T> queryForPojoList(Class<T> pojoType, String col,
-			Object[] args, String... requireFields) throws DataAccessException {
+	public <T> List<T> queryForPojoList(Class<T> pojoType, String col, Object... args) throws DataAccessException {
 		// TODO
 		// 先从缓存里查
 		// 缓存里没有的再从数据库里查

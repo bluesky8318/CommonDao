@@ -6,10 +6,8 @@ package cn.org.zeronote.orm.dao.parser;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import cn.org.zeronote.orm.ORMAutoAssemble;
 import cn.org.zeronote.orm.ORMColumn;
@@ -29,7 +27,6 @@ public class SqlSelGenerator implements Generator {
 	/**ORM pojo class*/
 	protected Class<?> pojoClazz;
 	protected Map<String, Object[]> argsMap;
-	protected Set<String> requireFields;
 	
 	protected String sql;
 	protected Object[] args;
@@ -45,15 +42,9 @@ public class SqlSelGenerator implements Generator {
 	 * @param pojoClazz
 	 * @param args
 	 */
-	public SqlSelGenerator(Class<?> pojoClazz, String[] requireFields, Map<String, Object[]> args) {
+	public SqlSelGenerator(Class<?> pojoClazz, Map<String, Object[]> args) {
 		this.pojoClazz = pojoClazz;
 		this.argsMap = args;
-		this.requireFields = new HashSet<String>();
-		if (requireFields != null) {
-			for (String f : requireFields) {
-				this.requireFields.add(f);
-			}
-		}
 	}
 	
 	
@@ -95,10 +86,6 @@ public class SqlSelGenerator implements Generator {
 		// SELECT
 		Field[] fields = pojoClazz.getDeclaredFields();
 		for (Field field : fields) {
-			if (!requireFields.isEmpty() && !requireFields.contains(field.getName())) {
-				// 不为空，则表示需要过滤，则判断是否包含，不包含，找下一个
-				continue;
-			}
 			field.setAccessible(true);
 			ORMColumn ormc = getAnnotation(pojoClazz, field);
 			if (ormc != null) {

@@ -35,8 +35,8 @@ public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 	 * @param pojoClazz
 	 * @param args
 	 */
-	public SqlSelHashGenerator(Class<?> pojoClazz, String[] requireFields, Map<String, Object[]> args) {
-		super(pojoClazz, requireFields, args);
+	public SqlSelHashGenerator(Class<?> pojoClazz, Map<String, Object[]> args) {
+		super(pojoClazz, args);
 	}
 	
 	/**

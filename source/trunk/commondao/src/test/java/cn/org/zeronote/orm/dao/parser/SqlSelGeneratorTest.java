@@ -34,7 +34,7 @@ public class SqlSelGeneratorTest {
 	public void testGetSql() throws IllegalAccessException {
 		Map<String, Object[]> args = new HashMap<String, Object[]>();
 		args.put("id", new Object[]{1,2,3});
-		SqlSelGenerator sqlGen = new SqlSelGenerator(DemoTablePO.class, null, args);
+		SqlSelGenerator sqlGen = new SqlSelGenerator(DemoTablePO.class, args);
 		System.out.println(sqlGen.getSql());
 		System.out.println(sqlGen.getArgs().length);
 	}

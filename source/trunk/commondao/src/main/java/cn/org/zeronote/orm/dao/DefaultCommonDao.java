@@ -100,7 +100,7 @@ public class DefaultCommonDao implements ICommonDao {
 		for (String key : args.keySet()) {
 			nArgs.put(key, new Object[]{args.get(key)});
 		}
-		SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, null, nArgs);
+		SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, nArgs);
 		try {
 			String sql = sqlGenerator.getSql();
 			Object[] argsObj = sqlGenerator.getArgs();
@@ -165,14 +165,14 @@ public class DefaultCommonDao implements ICommonDao {
 	 * @see com.ailk.aiip.apps.wasp.collect.common.ICommonDao#queryForPojoList(java.lang.Class, java.lang.Object[])
 	 */
 	@Override
-	public <T> List<T> queryForPojoList(Class<T> pojoType, Map<String, Object> args, String... requireFields)
+	public <T> List<T> queryForPojoList(Class<T> pojoType, Map<String, Object> args)
 			throws DataAccessException {
 		Map<String, Object[]> argsMap = new HashMap<String, Object[]>();
 		for (String key : args.keySet()) {
 			argsMap.put(key, new Object[]{args.get(key)});
 		}
 		
-		return queryForPojoList0(pojoType, argsMap, requireFields == null? new String[0] : requireFields);
+		return queryForPojoList0(pojoType, argsMap);
 	}
 	
 	/*
@@ -180,11 +180,11 @@ public class DefaultCommonDao implements ICommonDao {
 	 * @see cn.org.zeronote.orm.ICommonDao#queryForPojoList(java.lang.Class, java.lang.String, java.lang.Object[])
 	 */
 	@Override
-	public <T> List<T> queryForPojoList(Class<T> pojoType, String col, Object[] args, String... requireFields) throws DataAccessException {
+	public <T> List<T> queryForPojoList(Class<T> pojoType, String col, Object... args) throws DataAccessException {
 		Map<String, Object[]> argsMap = new HashMap<String, Object[]>();
 		argsMap.put(col, args);
 		
-		return queryForPojoList0(pojoType, argsMap, requireFields == null? new String[0] : requireFields);
+		return queryForPojoList0(pojoType, argsMap);
 	}
 
 	/**
@@ -193,12 +193,12 @@ public class DefaultCommonDao implements ICommonDao {
 	 * @param argsMap
 	 * @return
 	 */
-	private <T> List<T> queryForPojoList0(Class<T> pojoType, Map<String, Object[]> argsMap, String[] requireFields) {
+	private <T> List<T> queryForPojoList0(Class<T> pojoType, Map<String, Object[]> argsMap) {
 		String[] sqls = null;
 		List<Object[]> argsObjs = null;
 		if (pojoType.getAnnotation(ORMAutoAssemble.class) != null && pojoType.getAnnotation(ORMHash.class) != null) {
 			// 处理散列表，分SQL查询
-			SqlSelHashGenerator sqlGenerator = new SqlSelHashGenerator(pojoType, requireFields, argsMap);
+			SqlSelHashGenerator sqlGenerator = new SqlSelHashGenerator(pojoType, argsMap);
 			try {
 				sqls = sqlGenerator.getSqls();
 				argsObjs = sqlGenerator.getArgsObjs();
@@ -207,7 +207,7 @@ public class DefaultCommonDao implements ICommonDao {
 				throw new DataAccessException("init query sql error!", e);
 			}
 		} else {
-			SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, requireFields, argsMap);
+			SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, argsMap);
 			try {
 				sqls = new String[]{sqlGenerator.getSql()};
 				argsObjs = new ArrayList<Object[]>();
@@ -223,7 +223,7 @@ public class DefaultCommonDao implements ICommonDao {
 		for (int i = 0; i < sqls.length; i++) {
 			String sql = sqls[i];
 			Object[] argsObj = argsObjs.get(i);
-			List<T> ls = (List<T>) query(sql, argsObj, new PojoListResultSetExtractor<T>(pojoType, requireFields));
+			List<T> ls = (List<T>) query(sql, argsObj, new PojoListResultSetExtractor<T>(pojoType));
 			if (ls != null && !ls.isEmpty()) {
 				res.addAll(ls);
 			}
@@ -265,7 +265,7 @@ public class DefaultCommonDao implements ICommonDao {
 		for (String key : args.keySet()) {
 			argsMap.put(key, new Object[]{args.get(key)});
 		}
-		SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, null, argsMap);
+		SqlSelGenerator sqlGenerator = new SqlSelGenerator(pojoType, argsMap);
 		String sql;
 		Object[] objArgs;
 		try {

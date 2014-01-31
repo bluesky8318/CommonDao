@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import cn.org.zeronote.orm.ORMAutoAssemble;
 import cn.org.zeronote.orm.ORMCanUpdate;
@@ -55,8 +54,7 @@ public class BaseRowProcessor implements RowProcessor {
 	 * @see cn.org.zeronote.orm.dao.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class, java.util.Set)
 	 */
 	@Override
-	public <T> T toBean(ResultSet rs, Class<T> clz, Set<String> requireFields)
-			throws SQLException {
+	public <T> T toBean(ResultSet rs, Class<T> clz) throws SQLException {
 		// 映射读取
 		boolean ignoreCase = false;
 		if (ignoreCaseCache.containsKey(clz)) {
@@ -112,9 +110,6 @@ public class BaseRowProcessor implements RowProcessor {
 		// 创建Bean
 		T bean = this.newInstance(clz);
 		for (Field field : fieldsMap.keySet()) {
-			if (requireFields != null && !requireFields.isEmpty() && !requireFields.contains(field.getName())) {
-				continue;
-			}
 			ORMColumn ormc = fieldsMap.get(field);
 			String value = ormc == null ? field.getName() : ormc.value();
 			value = ignoreCase ? value.toLowerCase() : value;
@@ -130,26 +125,7 @@ public class BaseRowProcessor implements RowProcessor {
 			}
 		}
 		
-		if (requireFields != null && !requireFields.isEmpty()) {
-			Field f = fieldsCanUpdateCache.get(clz);
-			try {
-				f.set(bean, false);
-			} catch (IllegalArgumentException e) {
-				throw new SQLException("Cannot write value: " + f.getName(), e);
-			} catch (IllegalAccessException e) {
-				throw new SQLException("Cannot write value: " + f.getName(), e);
-			}
-		}
 		return bean;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see com.ailk.aiip.apps.wasp.collect.common.orm.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
-	 */
-	@Override
-	public <T> T toBean(ResultSet rs, Class<T> clz) throws SQLException {
-		return toBean(rs, clz, null);
 	}
 	
 	/**

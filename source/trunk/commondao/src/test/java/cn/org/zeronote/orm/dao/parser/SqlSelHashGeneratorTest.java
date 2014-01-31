@@ -36,7 +36,7 @@ public class SqlSelHashGeneratorTest {
 		Map<String, Object[]> args = new HashMap<String, Object[]>();
 		args.put("id", new Object[]{1,101,2,102,3});
 		args.put("cnt", new Object[]{"123"});
-		SqlSelHashGenerator sqlGen = new SqlSelHashGenerator(DemoHashTable.class, null, args);
+		SqlSelHashGenerator sqlGen = new SqlSelHashGenerator(DemoHashTable.class, args);
 		String[] sqls = sqlGen.getSqls();
 		List<Object[]> rArgs = sqlGen.getArgsObjs();
 		for (int i = 0; i < sqls.length; i++) {

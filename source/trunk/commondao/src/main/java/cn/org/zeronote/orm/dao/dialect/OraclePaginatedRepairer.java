@@ -31,7 +31,8 @@ public class OraclePaginatedRepairer implements IPaginatedRepairer {
 			DataSource dataSource, String sql, Object[] args,
 			Class<T> pojoType, RowSelection rowSelection)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
+		// 调整sql语句，添加rownum进行分页
+		
 		return null;
 	}
 
