@@ -10,7 +10,7 @@ public enum DBType {
 	/** mysql */
 	MYSQL,
 	/** ms sql server */
-	MSSQL,
+	MSSQL2005PLUS,
 	/** oracle */
 	ORACLE;
 }

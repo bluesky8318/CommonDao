@@ -18,8 +18,8 @@ public final class PaginatedRepairerFactory {
 	 */
 	public static IPaginatedRepairer getInstance(DBType dbType) {
 		switch (dbType) {
-		case MSSQL:
-			return new MSSqlServerPaginatedRepairer();
+		case MSSQL2005PLUS:
+			return new MSSqlServerTopPaginatedRepairer();
 		case MYSQL:
 			return new MySQLPaginatedRepairer();
 		case ORACLE:

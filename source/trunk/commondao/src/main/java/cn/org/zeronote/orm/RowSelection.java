@@ -26,24 +26,39 @@ public class RowSelection implements Serializable {
 	/**本页最后一行（含）*/
 	private int lastRow;
 	
+	/** 排序字段名称，对应数据库中的列名 */
+	private String order;
+
 	/**
-	 * 构造方法
+	 * 构造方法，没有分页排序字段，有些数据库不支持
 	 * @param startPage 0代表第一页，依次类推
 	 */
 	public RowSelection(int startPage){
-		this(startPage, DEFAULT_PAGESIZE);
+		this(startPage, DEFAULT_PAGESIZE, null);
+	}
+	
+	/**
+	 * 构造方法
+	 * @param startPage 0代表第一页，依次类推
+	 * @param order 分页用排序字段名称
+	 */
+	public RowSelection(int startPage, String order){
+		this(startPage, DEFAULT_PAGESIZE, order);
 	}
 	
 	/**
 	 * 构造方法
 	 * @param startPage 0代表第一页，依次类推
 	 * @param pageSize 每页包含的记录数
+	 * @param order 分页用排序字段名称
 	 */
-	public RowSelection(int startPage, int pageSize) {
+	public RowSelection(int startPage, int pageSize, String order) {
 		this.startPage = startPage;
 		this.pageSize = pageSize;
 		this.firstRow = startPage*pageSize;
 		this.lastRow = firstRow + pageSize;
+		
+		this.order = order;
 	}
 
 	/**
@@ -83,4 +98,14 @@ public class RowSelection implements Serializable {
 	public int getLastRow(){
 		return lastRow;
 	}
+
+	/**
+	 * 排序字段名称，对应数据库中的列名
+	 * @return
+	 */
+	public String getOrder() {
+		return order;
+	}
+	
+	
 }

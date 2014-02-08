@@ -30,7 +30,21 @@ public class MSSqlServerTopPaginatedRepairer extends AbstractPaginatedRepairer {
 			DataSource dataSource, String sql, Object[] args,
 			Class<T> pojoType, RowSelection rowSelection)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
+		// 将sql语句转换成对应的 查询总数/查询当前页 两个sql
+		// 总数sql
+		StringBuilder cSql = new StringBuilder("select count(1) from (");
+		cSql.append(sql)
+			.append(") as mt");
+		
+		// 分页sql
+		StringBuilder nSql = new StringBuilder("select * from (");
+		nSql.append("select *, ROW_NUMBER() OVER (ORDER BY ")
+			.append(rowSelection.getOrder())
+			.append(") as rank from (")
+			.append(sql)
+			.append(") as mt");
+		nSql.append(") as mst where mst.rank between ? and ? ");
+		
 		return null;
 	}
 
