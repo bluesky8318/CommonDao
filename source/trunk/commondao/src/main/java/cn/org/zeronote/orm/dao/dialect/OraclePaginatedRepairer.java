@@ -14,7 +14,7 @@ import cn.org.zeronote.orm.RowSelection;
  * @author <a href='mailto:lizheng8318@gmail.com'>leon</a>
  *
  */
-public class OraclePaginatedRepairer implements IPaginatedRepairer {
+public class OraclePaginatedRepairer extends AbstractPaginatedRepairer {
 
 	/**
 	 * 

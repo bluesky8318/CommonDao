@@ -12,6 +12,12 @@ import java.util.Date;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.NumberUtils;
+
+import cn.org.zeronote.orm.DataAccessException;
 
 
 /**
@@ -21,6 +27,8 @@ import org.apache.commons.dbutils.QueryRunner;
  */
 public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 
+	private static Logger logger = LoggerFactory.getLogger(AbstractPaginatedRepairer.class);
+	
 	/** 查询器 */
 	private QueryRunner queryRunner;
 	
@@ -30,6 +38,24 @@ public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 	public AbstractPaginatedRepairer() {
 	}
 
+	/**
+	 * 实际查询
+	 * @param sql
+	 * @param args
+	 * @param resultSetExtractor
+	 * @return
+	 * @throws DataAccessException
+	 */
+	protected <T> T query(DataSource dataSource, String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
+		QueryRunner qr = getPaginatedQueryRunner(dataSource);
+		logger.debug("Query SQL:{}", sql);
+		try {
+			return qr.query(sql, resultSetExtractor, pearParams(args));
+		} catch (SQLException e) {
+			throw new DataAccessException("Query error!", e);
+		}
+	}
+	
 	/**
 	 * 支持游标滚动的查询
 	 * @return
@@ -68,4 +94,28 @@ public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 		return nArgs;
 	}
 	
+	@SuppressWarnings("unchecked")
+	protected Object convertValueToRequiredType(Object value, Class<?> requiredType) {
+		if (value == null) {
+			return null;
+		}
+		if (String.class.equals(requiredType)) {
+			return String.valueOf(value);
+		}
+		else if (Number.class.isAssignableFrom(requiredType)) {
+			if (value instanceof Number) {
+				// Convert original Number to target Number class.
+				return NumberUtils.convertNumberToTargetClass(((Number) value), (Class<Number>)requiredType);
+			}
+			else {
+				// Convert stringified value to target Number class.
+				return NumberUtils.parseNumber(value.toString(), (Class<Number>)requiredType);
+			}
+		}
+		else {
+			throw new IllegalArgumentException(
+					"Value [" + value + "] is of type [" + value.getClass().getName() +
+					"] and cannot be converted to required type [" + requiredType.getName() + "]");
+		}
+	}
 }

@@ -19,7 +19,10 @@ import cn.org.zeronote.orm.extractor.PaginationPojoListResultSetExtractor;
 
 /**
  * MS Sql Server 分页查询器
+ * <br>
  * 基于内存的分页方式，对大数据处理不适用，这里只保留，不使用 
+ * <br>
+ * 此方法对sqlserver有效，但时常出错，指针异常
  * @author <a href='mailto:lizheng8318@gmail.com'>leon</a>
  *
  */
