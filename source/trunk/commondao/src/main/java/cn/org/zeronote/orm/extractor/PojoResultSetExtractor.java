@@ -22,7 +22,7 @@ public class PojoResultSetExtractor<T> implements ResultSetExtractor<T> {
 	
 	private RowProcessor rowProcessor = new BaseRowProcessor();
 	/**
-	 * 
+	 * @param cls	class
 	 */
 	public PojoResultSetExtractor(Class<T> cls) {
 		this(cls, false);

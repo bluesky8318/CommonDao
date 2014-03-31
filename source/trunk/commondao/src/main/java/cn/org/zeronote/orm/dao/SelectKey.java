@@ -23,8 +23,8 @@ public class SelectKey {
 	
 	/**
 	 * 
-	 * @param keyProperty
-	 * @param query
+	 * @param keyProperty	数据库类型
+	 * @param query			查询语句
 	 */
 	public SelectKey(String keyProperty, String query) {
 		this.keyProperty = keyProperty;

@@ -39,8 +39,8 @@ public class SqlSelGenerator implements Generator {
 
 	/**
 	 * 
-	 * @param pojoClazz
-	 * @param args
+	 * @param pojoClazz		pojo class
+	 * @param args			params
 	 */
 	public SqlSelGenerator(Class<?> pojoClazz, Map<String, Object[]> args) {
 		this.pojoClazz = pojoClazz;
@@ -51,8 +51,7 @@ public class SqlSelGenerator implements Generator {
 	
 	/**
 	 * 生成SQL
-	 * @return
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException	exception 
 	 */
 	protected void generateParam() throws IllegalAccessException {
 		ORMAutoAssemble ormaa = pojoClazz.getAnnotation(ORMAutoAssemble.class);
@@ -76,9 +75,12 @@ public class SqlSelGenerator implements Generator {
 	}
 	
 	/**
-	 * 生成SQL
-	 * @param reArgs
-	 * @return
+	 * 生成sql
+	 * @param params		params
+	 * @param tableName		table name
+	 * @param argsMap		arg map
+	 * @param orders		order
+	 * @return the sql
 	 */
 	protected String genSql(List<Object> params, String tableName, Map<String, Object[]> argsMap, String[] orders) {
 		// params to param:params
@@ -167,9 +169,9 @@ public class SqlSelGenerator implements Generator {
 	 * 转换原则：
 	 * String ->Number
 	 * Number -> String
-	 * @param val
-	 * @param clz
-	 * @return
+	 * @param val	val
+	 * @param clz	class
+	 * @return		the value obj
 	 */
 	private Object matchParam(Object val, Class<?> clz) {
 		if (val == null) {
@@ -198,8 +200,8 @@ public class SqlSelGenerator implements Generator {
 	
 	/**
 	 * 相关参数
-	 * @return
-	 * @throws IllegalAccessException 
+	 * @return	the args
+	 * @throws IllegalAccessException	exception 
 	 */
 	public Object[] getArgs() throws IllegalAccessException {
 		if (args == null) {
@@ -211,7 +213,7 @@ public class SqlSelGenerator implements Generator {
 	/**
 	 * Sql语句
 	 * @return the sql
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException 	exception
 	 */
 	public String getSql() throws IllegalAccessException {
 		if (sql == null) {

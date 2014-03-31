@@ -50,12 +50,13 @@ public class MSSqlServerPaginatedRepairer extends AbstractPaginatedRepairer {
 	
 	/**
 	 * 分页查询
-	 * 与正常查询不一致，需要更多的操作
-	 * @param sql
-	 * @param args
-	 * @param resultSetExtractor
-	 * @return
-	 * @throws DataAccessException
+	 * @param <T>					pojo class
+	 * @param dataSource			数据源
+	 * @param sql					查询语句
+	 * @param args					查询参数
+	 * @param resultSetExtractor	结果集装配
+	 * @return						实际结果
+	 * @throws DataAccessException	数据访问异常
 	 */
 	protected <T> T queryPaginated(DataSource dataSource, String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
 		QueryRunner qr = getPaginatedQueryRunner(dataSource);
@@ -66,6 +67,4 @@ public class MSSqlServerPaginatedRepairer extends AbstractPaginatedRepairer {
 			throw new DataAccessException("Query error!", e);
 		}
 	}
-	
-
 }

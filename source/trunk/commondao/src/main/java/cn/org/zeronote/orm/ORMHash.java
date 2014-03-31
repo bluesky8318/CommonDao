@@ -21,13 +21,13 @@ public @interface ORMHash {
 	/**
 	 * 散列表数量
 	 * <p> 小于等于0，则不做散列处理
-	 * @return
+	 * @return	hash size
 	 */
 	int hashSize();
 	
 	/**
 	 * 散列参照字段，该列必须是int/long
-	 * @return
+	 * @return	hash ref column
 	 */
 	String hashRefColumn();
 	
@@ -36,7 +36,7 @@ public @interface ORMHash {
 	 * <p>
 	 * 建表语句中的TableName使用{0}替换，建表时会使用<code>tableName()</code>和对应的<code>hashSize()</code>进行替换。
 	 * </p>
-	 * @return
+	 * @return	建表语句
 	 */
 	String createSQL();
 }

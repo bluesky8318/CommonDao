@@ -20,12 +20,12 @@ import cn.org.zeronote.orm.extractor.PojoListResultSetExtractor;
  * @author <a href='mailto:lizheng8318@gmail.com'>leon</a>
  *
  */
-public class MSSqlServerTopPaginatedRepairer extends AbstractPaginatedRepairer {
+public class MSSqlServerRowNumberPaginatedRepairer extends AbstractPaginatedRepairer {
 
 	/**
 	 * 
 	 */
-	public MSSqlServerTopPaginatedRepairer() {
+	public MSSqlServerRowNumberPaginatedRepairer() {
 	}
 
 	/* (non-Javadoc)

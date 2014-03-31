@@ -773,11 +773,12 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/**
 	 * 实际查询
-	 * @param sql
-	 * @param args
-	 * @param resultSetExtractor
-	 * @return
-	 * @throws DataAccessException
+	 * @param <T>	指定参数类型
+	 * @param sql	查询sql语句
+	 * @param args	查询参数，与“?”个数相同
+	 * @param resultSetExtractor	resultset 装配器
+	 * @return	查询制定的结果
+	 * @throws DataAccessException	数据访问异常
 	 */
 	protected <T> T query(String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
 		QueryRunner qr = getQueryRunner();
@@ -791,10 +792,10 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/**
 	 * update操作执行
-	 * @param sql
-	 * @param args
-	 * @return
-	 * @throws DataAccessException 
+	 * @param sql	查询sql语句
+	 * @param args	查询参数
+	 * @return		执行更新操作影响记录数
+	 * @throws DataAccessException 	数据访问异常
 	 */
 	protected int execute(String sql, Object[] args) throws DataAccessException {
 		QueryRunner qr = getQueryRunner();
@@ -808,8 +809,8 @@ public class DefaultCommonDao implements ICommonDao {
 
 	/**
 	 * 处理数据类型
-	 * @param args
-	 * @return
+	 * @param args	原始参数
+	 * @return		重新装配后的参数
 	 */
 	private Object[] pearParams(Object[] args) {
 		Object[] nArgs = new Object[args.length];
@@ -838,8 +839,8 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/**
 	 * 获取连接
-	 * @return
-	 * @throws SQLException
+	 * @return	connection
+	 * @throws SQLException	获取链接异常
 	 */
 	protected Connection getConnection() throws SQLException {
 		return this.dataSource.getConnection();
@@ -847,8 +848,8 @@ public class DefaultCommonDao implements ICommonDao {
 	
 	/**
 	 * 关闭连接
-	 * @param conn
-	 * @throws SQLException
+	 * @param conn	连接
+	 * @throws SQLException	关闭连接异常
 	 */
 	protected void close(Connection conn) throws SQLException {
 		if (conn != null && !conn.isClosed()) {
@@ -859,10 +860,8 @@ public class DefaultCommonDao implements ICommonDao {
 	/**
 	 * set datasource
 	 * @param dataSource the dataSource to set
-	 * @throws DataAccessException 
-	 * @throws SQLException 
 	 */
-	public void setDataSource(DataSource dataSource) throws SQLException {
+	public void setDataSource(DataSource dataSource) {
 		synchronized (synObj) {
 			this.dataSource = dataSource;
 		}

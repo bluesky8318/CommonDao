@@ -22,8 +22,6 @@ import cn.org.zeronote.orm.ORMCanUpdate;
 import cn.org.zeronote.orm.ORMColumn;
 import cn.org.zeronote.orm.dao.RowProcessor;
 
-
-
 /**
  * 拼装结果集<p>
  * 如果在JVM参数中配置了db.charset，则可以支持取数据自动转码
@@ -41,7 +39,6 @@ public class BaseRowProcessor implements RowProcessor {
 	private Map<Class<?>, Map<Field, ORMColumn>> fieldsCache = new HashMap<Class<?>, Map<Field,ORMColumn>>();
 	/**判断是否可更新的字段缓存*/
 	private Map<Class<?>, Field> fieldsCanUpdateCache = new HashMap<Class<?>, Field>();
-	
 	
 	/**
 	 * 
@@ -130,10 +127,10 @@ public class BaseRowProcessor implements RowProcessor {
 	
 	/**
 	 * new instance
-	 * @param <T>
-	 * @param c
-	 * @return
-	 * @throws SQLException
+	 * @param <T>	class
+	 * @param c		class
+	 * @return		初始化实例
+	 * @throws SQLException		数据访问异常
 	 */
 	protected <T> T newInstance(Class<T> c) throws SQLException {
 		try {
@@ -214,6 +211,13 @@ public class BaseRowProcessor implements RowProcessor {
 		}
 	}
 	
+	/**
+	 * 获取指定结果值
+	 * @param rs		原始结果集
+	 * @param index		结果集索引
+	 * @return			转换后的值
+	 * @throws SQLException		数据访问异常
+	 */
 	public Object getResultSetValue(ResultSet rs, int index) throws SQLException {
 		Object obj = rs.getObject(index);
 		String className = null;

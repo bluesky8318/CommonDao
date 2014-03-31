@@ -30,6 +30,7 @@ public class SqlRepairer {
 	}
 
 	/**
+	 * @param type	db type
 	 * @return the selectKey
 	 */
 	public static SelectKey getSelectKey(DBType type) {

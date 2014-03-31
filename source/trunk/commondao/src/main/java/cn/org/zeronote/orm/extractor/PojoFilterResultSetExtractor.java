@@ -30,13 +30,20 @@ public class PojoFilterResultSetExtractor<T> implements ResultSetExtractor<T> {
 	private RowProcessor rowProcessor = new BaseRowProcessor();
 	
 	private Boolean ignoreCase;
+	
 	/**
-	 * 
+	 * @param cls	class
 	 */
 	public PojoFilterResultSetExtractor(Class<T> cls) {
 		this(cls, false, new HashMap<String, Object>());
 	}
 	
+	/**
+	 * 
+	 * @param cls		class
+	 * @param next		是否包含下一个
+	 * @param filter	过滤内容
+	 */
 	public PojoFilterResultSetExtractor(Class<T> cls, boolean next, Map<String, Object> filter) {
 		this.pojoType = cls;
 		this.next = next;

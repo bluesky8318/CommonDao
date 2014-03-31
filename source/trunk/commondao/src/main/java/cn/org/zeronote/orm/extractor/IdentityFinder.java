@@ -26,7 +26,8 @@ public class IdentityFinder {
 	private SelectKey selectKey;
 	
 	/**
-	 * 
+	 * @param conn	connection
+	 * @param selectKey	自增主键查询
 	 */
 	public IdentityFinder(Connection conn, SelectKey selectKey) {
 		this.conn = conn;
@@ -35,10 +36,10 @@ public class IdentityFinder {
 	
 	/**
 	 * 查找自增主键并填充到队列中
-	 * @param objs
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 * @throws SQLException 
+	 * @param objs							填充对象
+	 * @throws IllegalArgumentException		exception
+	 * @throws IllegalAccessException		exception
+	 * @throws SQLException 				exception
 	 */
 	public void find(Object... objs) throws IllegalArgumentException, IllegalAccessException, SQLException {
 		Class<?> clz = objs[0].getClass();

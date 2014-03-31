@@ -19,7 +19,7 @@ public @interface ORMAutoAssemble {
 	
 	/**
 	 * 字段是否忽略大小写，默认区分
-	 * @return
+	 * @return	is ignore case
 	 */
 	boolean ignoreCase() default false;
 }

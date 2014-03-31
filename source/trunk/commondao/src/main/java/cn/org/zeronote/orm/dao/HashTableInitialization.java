@@ -38,7 +38,7 @@ public class HashTableInitialization {
 	
 	/**
 	 * 初始化指定类
-	 * @throws SQLException 
+	 * @throws SQLException 建表异常
 	 */
 	public void init() throws SQLException {
 		// 初始化表

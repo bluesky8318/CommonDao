@@ -110,10 +110,10 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	
 	/**
 	 * 生成代码
-	 * @param pack
-	 * @param outputFolder
-	 * @param tables
-	 * @throws IOException 
+	 * @param pack			pack
+	 * @param outputFolder	folder
+	 * @param tables		tables
+	 * @throws IOException 	exception
 	 */
 	private void buildSource(String pack, String outputFolder, List<Table> tables, boolean useDefault) throws IOException {
 		String sepa = File.separator;
@@ -214,8 +214,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	
 	/**
 	 * 转换名称
-	 * @param dbObjName
-	 * @return
+	 * @param dbObjName	db object name
+	 * @return	Bean name
 	 */
 	private String toBeanName(String dbObjName, boolean firstUpper) {
 		// 小写
@@ -234,8 +234,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 
 	/**
 	 * 获取所有table
-	 * @return
-	 * @throws SQLException 
+	 * @return		table list
+	 * @throws SQLException exception
 	 */
 	private List<Table> gainTables() throws SQLException {
 		List<Table> tables = new ArrayList<Table>();
@@ -299,8 +299,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	
 	/**
 	 * 转换bean需要的类型定义
-	 * @param type
-	 * @return
+	 * @param type		db object type
+	 * @return			pojo class
 	 */
 	private Class<?> toBeanType(int type) {
 		Class<?> clz = typesMap.get(type);
@@ -310,7 +310,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	/**
 	 * set datasource
 	 * @param dataSource the dataSource to set
-	 * @throws SQLException 
+	 * @throws SQLException 	exception
 	 */
 	public void setDataSource(DataSource dataSource) throws SQLException {
 		this.connection = dataSource.getConnection();
@@ -319,7 +319,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	/**
 	 * set xa datasource
 	 * @param dataSource the XAdataSource to set
-	 * @throws SQLException 
+	 * @throws SQLException exception
 	 */
 	public void setXADataSource(XADataSource dataSource) throws SQLException {
 		this.connection = dataSource.getXAConnection().getConnection();
@@ -327,7 +327,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 	
 	/**
 	 * set datasource connection
-	 * @param connection
+	 * @param connection conn
 	 */
 	public void setConnection(Connection connection) {
 		this.connection = connection;

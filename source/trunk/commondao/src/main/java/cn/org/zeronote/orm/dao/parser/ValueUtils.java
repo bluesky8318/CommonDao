@@ -10,8 +10,6 @@ import java.util.Date;
 
 import org.springframework.util.NumberUtils;
 
-
-
 /**
  * 值转换工具类
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
@@ -27,11 +25,10 @@ public abstract class ValueUtils {
 
 	/**
 	 * 将value转换为指定类型的值，转换不成功则返回原始的value
-	 * @param value
-	 * @param type
-	 * @param targetClazz
-	 * @return
-	 * @throws ParseException 
+	 * @param value				value
+	 * @param targetClazz		target class
+	 * @return					re value
+	 * @throws ParseException 	解析异常
 	 */
 	@SuppressWarnings("unchecked")
 	public static Object conversionType(Object value, Class<?> targetClazz) throws ParseException {

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.FactoryBean;
  * 从spring2.5中copy过来并修改
  * Spring提供的实现里没有停止Jotm的两个守护线程
  * @author <a href="mailto:lizheng8318@gmail.com">lizheng</a>
- * 2007-3-27
  */
 public class JotmFactoryBeanEx implements FactoryBean<Current>, DisposableBean {
 
@@ -42,6 +41,7 @@ public class JotmFactoryBeanEx implements FactoryBean<Current>, DisposableBean {
 	 * Set the default transaction timeout for the JOTM instance.
 	 * <p>Should only be called for a local JOTM instance,
 	 * not when accessing an existing (shared) JOTM instance.
+	 * @param defaultTimeout default timeout
 	 */
 	public void setDefaultTimeout(int defaultTimeout) {
 		this.jotmCurrent.setDefaultTimeout(defaultTimeout);
@@ -60,6 +60,7 @@ public class JotmFactoryBeanEx implements FactoryBean<Current>, DisposableBean {
 	 * Return the JOTM instance created by this factory bean, if any.
 	 * Will be <code>null</code> if an already active JOTM instance is used.
 	 * <p>Application code should never need to access this.
+	 * @return Jotm
 	 */
 	public Jotm getJotm() {
 		return this.jotm;

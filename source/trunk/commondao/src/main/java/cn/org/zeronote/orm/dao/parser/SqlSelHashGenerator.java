@@ -32,8 +32,8 @@ public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 
 	/**
 	 * 
-	 * @param pojoClazz
-	 * @param args
+	 * @param pojoClazz		pojo class
+	 * @param args			args
 	 */
 	public SqlSelHashGenerator(Class<?> pojoClazz, Map<String, Object[]> args) {
 		super(pojoClazz, args);
@@ -41,8 +41,7 @@ public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 	
 	/**
 	 * 生成SQL
-	 * @return
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException	exception 
 	 */
 	protected void generateParam() throws IllegalAccessException {
 		ORMAutoAssemble ormaa = pojoClazz.getAnnotation(ORMAutoAssemble.class);
@@ -112,8 +111,8 @@ public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 	
 	/**
 	 * 相关参数
-	 * @return
-	 * @throws IllegalAccessException 
+	 * @return the args
+	 * @throws IllegalAccessException 	exception 
 	 */
 	public List<Object[]> getArgsObjs() throws IllegalAccessException {
 		if (argsObjs == null) {
@@ -125,7 +124,7 @@ public class SqlSelHashGenerator extends SqlSelGenerator implements Generator{
 	/**
 	 * Sql语句
 	 * @return the sql
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException 	exception
 	 */
 	public String[] getSqls() throws IllegalAccessException {
 		if (sqls == null) {

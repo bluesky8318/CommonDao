@@ -18,13 +18,14 @@ public interface IPaginatedRepairer {
 
 	/**
 	 * 分页查询
-	 * @param dataSource
-	 * @param sql
-	 * @param args
-	 * @param pojoType
-	 * @param rowSelection
-	 * @return
-	 * @throws DataAccessException
+	 * @param <T>					pojo class
+	 * @param dataSource			数据源
+	 * @param sql					查询语句
+	 * @param args					查询参数
+	 * @param pojoType				PO类型
+	 * @param rowSelection			分页设置
+	 * @return						分页结果集
+	 * @throws DataAccessException	数据访问异常
 	 */
 	<T> PaginationSupport<T> queryForPaginatedPojoList(DataSource dataSource, String sql, Object[] args, Class<T> pojoType, RowSelection rowSelection) throws DataAccessException;
 }

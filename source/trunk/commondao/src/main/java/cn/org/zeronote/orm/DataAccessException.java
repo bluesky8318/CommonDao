@@ -23,22 +23,23 @@ public class DataAccessException extends RuntimeException {
 	}
 
 	/**
-	 * @param message
+	 * @param message	异常消息
 	 */
 	public DataAccessException(String message) {
 		super(message);
 	}
 
 	/**
-	 * @param cause
+	 * @param cause		异常
 	 */
 	public DataAccessException(Throwable cause) {
 		super(cause);
 	}
 
 	/**
-	 * @param message
-	 * @param cause
+	 * 
+	 * @param message	异常内容
+	 * @param cause		异常
 	 */
 	public DataAccessException(String message, Throwable cause) {
 		super(message, cause);

@@ -49,7 +49,9 @@ public class SqlUpdGenerator implements Generator {
 	
 	/**
 	 * 
-	 * @param pojoClazz
+	 * @param pojo						pojo
+	 * @param usePhysicalPk				是否主键
+	 * @throws DataAccessException		exception
 	 */
 	public SqlUpdGenerator(Object pojo, boolean usePhysicalPk) throws DataAccessException{
 		this.pojo = pojo;
@@ -94,11 +96,11 @@ public class SqlUpdGenerator implements Generator {
 
 	/**
 	 * 生成主键依赖的
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws ParseException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
+	 * @throws ParseException 				exception
 	 */
 	private void generate() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		
@@ -122,10 +124,10 @@ public class SqlUpdGenerator implements Generator {
 	
 	/**
 	 * 生成sql
-	 * @param tableName
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws ParseException 
+	 * @param tableName						表名
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws ParseException 				exception
 	 */
 	private void generate(String tableName) throws IllegalArgumentException, IllegalAccessException, ParseException {
 
@@ -215,12 +217,13 @@ public class SqlUpdGenerator implements Generator {
 	}
 	
 	/**
+	 * 生成sql
 	 * @return the sql
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws ParseException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
+	 * @throws ParseException 				exception
 	 */
 	public String getSql() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		if (sql == null) {
@@ -230,12 +233,13 @@ public class SqlUpdGenerator implements Generator {
 	}
 
 	/**
+	 * 生成sql的参数
 	 * @return the args
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws ParseException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
+	 * @throws ParseException 				exception
 	 */
 	public Object[] getArgs() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ParseException {
 		if (args == null) {
@@ -243,5 +247,4 @@ public class SqlUpdGenerator implements Generator {
 		}
 		return args;
 	}
-
 }

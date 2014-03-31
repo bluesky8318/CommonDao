@@ -16,7 +16,7 @@ import cn.org.zeronote.orm.ORMHash;
 import cn.org.zeronote.orm.ORMTable;
 
 /**
- * UPDATE sql 语句生成器
+ * DELETE sql 语句生成器
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
@@ -31,19 +31,20 @@ public class SqlDelGenerator implements Generator {
 	
 	/**
 	 * 条件删除，无需自己创建删除对象
-	 * @param pojoType
-	 * @param args
+	 * @param pojoType		POJO class
+	 * @param args			params
 	 */
 	public SqlDelGenerator(Class<?> pojoType, Map<String, Object> args) {
 		this.pojoClazz = pojoType;
 		this.delArgs = args;
 	}
-	
+
 	/**
 	 * 主键删除
-	 * @param pojoClazz
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
+	 * @param pojo							pojo
+	 * @param usePhysicalPk					是否物理主键
+	 * @throws IllegalArgumentException		参数异常
+	 * @throws IllegalAccessException		参数异常
 	 */
 	public SqlDelGenerator(Object pojo, boolean usePhysicalPk) throws IllegalArgumentException, IllegalAccessException {
 		this.pojoClazz = pojo.getClass();
@@ -52,11 +53,11 @@ public class SqlDelGenerator implements Generator {
 	
 	/**
 	 * 主键删除
-	 * @param pojoType
-	 * @param pkVal
-	 * @param usePhysicalPk
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @param pojoType						pojo
+	 * @param pkVal							主键
+	 * @param usePhysicalPk					是否物理主键
+	 * @throws IllegalAccessException 		参数异常
+	 * @throws InstantiationException 		参数异常
 	 */
 	public SqlDelGenerator(Class<?> pojoType, Object pkVal, boolean usePhysicalPk) throws InstantiationException, IllegalAccessException {
 		this.pojoClazz = pojoType;
@@ -65,12 +66,12 @@ public class SqlDelGenerator implements Generator {
 
 	/**
 	 * 拼装删除参数
-	 * @param pojoType
-	 * @param pkVal
-	 * @param usePhysicalPk
-	 * @return
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
+	 * @param pojoType						pojo
+	 * @param pkVal							主键
+	 * @param usePhysicalPk					是否物理主键
+	 * @return								参数Map
+	 * @throws IllegalArgumentException		参数异常
+	 * @throws IllegalAccessException		参数异常
 	 */
 	private Map<String, Object> fieldArgsMap(Class<?> pojoType, Object pkVal, boolean usePhysicalPk) throws IllegalArgumentException, IllegalAccessException {
 		Map<String, Object> delArgs = new HashMap<String, Object>();
@@ -97,11 +98,11 @@ public class SqlDelGenerator implements Generator {
 	
 	/**
 	 * 拼装删除参数
-	 * @param pojo
-	 * @param usePhysicalPk
-	 * @return
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
+	 * @param pojo							pojo
+	 * @param usePhysicalPk					是否物理主键
+	 * @return								参数Map
+	 * @throws IllegalArgumentException		参数异常
+	 * @throws IllegalAccessException		参数异常
 	 */
 	private Map<String, Object> fieldArgsMap(Object pojo, boolean usePhysicalPk) throws IllegalArgumentException, IllegalAccessException {
 		Map<String, Object> delArgs = new HashMap<String, Object>();
@@ -128,11 +129,11 @@ public class SqlDelGenerator implements Generator {
 	
 	/**
 	 * 生成SQL
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SQLException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SQLException 				exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	private void generate() throws IllegalArgumentException, IllegalAccessException, SQLException, NoSuchFieldException, SecurityException {
 		// TABLE
@@ -162,10 +163,10 @@ public class SqlDelGenerator implements Generator {
 	
 	/**
 	 * 生成主键依赖的
-	 * @param tableName
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SQLException 
+	 * @param tableName						表名
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SQLException 				exception
 	 */
 	private void generate(String tableName) throws IllegalArgumentException, IllegalAccessException, SQLException {
 		StringBuilder del = new StringBuilder("DELETE FROM ");
@@ -202,12 +203,13 @@ public class SqlDelGenerator implements Generator {
 	}
 	
 	/**
+	 * 生成sql
 	 * @return the sql
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SQLException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SQLException 				exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	public String getSql() throws IllegalArgumentException, IllegalAccessException, SQLException, NoSuchFieldException, SecurityException {
 		if (sql == null) {
@@ -217,12 +219,13 @@ public class SqlDelGenerator implements Generator {
 	}
 
 	/**
+	 * 生成sql对应的参数
 	 * @return the args
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SQLException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException		exception 
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SQLException 				exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	public Object[] getArgs() throws IllegalArgumentException, IllegalAccessException, SQLException, NoSuchFieldException, SecurityException {
 		if (args == null) {

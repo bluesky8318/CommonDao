@@ -22,19 +22,19 @@ public @interface ORMColumn {
 	
 	/**
 	 * 字段名
-	 * @return
+	 * @return	column
 	 */
 	String value();
 	
 	/**
 	 * 是否是物理主键
-	 * @return
+	 * @return physical pk
 	 */
 	boolean physicalPkFld() default false;
 	
 	/**
 	 * 是否逻辑主键
-	 * @return
+	 * @return logic pk 
 	 */
 	boolean LogicPkFld() default false;
 	
@@ -42,27 +42,27 @@ public @interface ORMColumn {
 	 * 更新默认值
 	 * 拼接方法：
 	 * 		如果get(obj)为null，则拼接：value=defaultValue，边界单引号需要在defaultValue中自行设置
-	 * @return
+	 * @return default value
 	 */
 	String defaultValue() default "null";
 	
 	/**
 	 * 是否自增
-	 * @return
+	 * @return is auto increment
 	 */
 	boolean autoIncrement() default false;
 	
 	/**
 	 * 默认值的作用域
-	 * @return
+	 * @return default value scope
 	 */
 	ORMValueScope defaultValueScope() default ORMValueScope.ALL;
 	
 	/**
 	 * 是否追加
-	 * <br/>
+	 * <br>
 	 * 主要针对String 类型，进行文字内容追加
-	 * @return
+	 * @return	is append
 	 */
 	boolean append() default false;
 }

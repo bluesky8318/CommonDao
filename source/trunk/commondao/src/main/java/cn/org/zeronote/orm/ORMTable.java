@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Table Annotation
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
@@ -28,21 +29,21 @@ public @interface ORMTable {
 	 * <p>
 	 * 默认为空，这个时候使用<code>tableName</code>来作为cache key前缀
 	 * </p>
-	 * @return
+	 * @return	cached
 	 */
 	String cachedShortAlias() default "";
 
 	/**
 	 * 指定nosql缓存策略key值
 	 * <p>格式：field=key;field:对应javabean的成员变量名称，区分大小写;key:该字段的缓存key</p>
-	 * @return
+	 * @return	cache key
 	 */
 	String[] cachedKey() default {};
 	
 	/**
 	 * 指定查询对应的排序字段
 	 * <br>数据库字段名
-	 * @return
+	 * @return order
 	 */
 	String[] order() default {};
 }

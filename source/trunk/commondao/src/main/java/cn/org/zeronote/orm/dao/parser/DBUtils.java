@@ -25,9 +25,9 @@ public class DBUtils {
 	
     /**
      * 计算hash值
-     * @param id
-     * @param size
-     * @return
+     * @param id	hash key
+     * @param size	hash size
+     * @return		hash string
      */
     public String hash(long id, int size) {
         if (size < 1) {
@@ -80,7 +80,7 @@ public class DBUtils {
     
 	/**
 	 * 获取单例实例
-	 * @return
+	 * @return	db instance
 	 */
 	public static DBUtils getInstance() {
 		if (instance == null) {

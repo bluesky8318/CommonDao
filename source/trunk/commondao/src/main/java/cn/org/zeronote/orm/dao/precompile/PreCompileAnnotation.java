@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * Annotation预编译
- * <br/>
+ * <br>
  * 对ORM中的对象进行预编译缓存
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
@@ -31,9 +31,10 @@ public class PreCompileAnnotation {
 	
 	/**
 	 * class 上的注解
-	 * @param clz
-	 * @param annotationClass
-	 * @return
+	 * @param <A>					class
+	 * @param clz					pojo class
+	 * @param annotationClass		annotation
+	 * @return						指定的注解
 	 */
 	@SuppressWarnings("unchecked")
 	public <A extends Annotation> A getAnnotation(Class<?> clz, Class<A> annotationClass) {
@@ -48,10 +49,11 @@ public class PreCompileAnnotation {
 	
 	/**
 	 * class的field上的注解
-	 * @param clz
-	 * @param field
-	 * @param annotationClass
-	 * @return
+	 * @param <A>				class
+	 * @param clz				pojo class
+	 * @param field				pojo field
+	 * @param annotationClass	annotation
+	 * @return					指定的注解
 	 */
 	@SuppressWarnings("unchecked")
 	public <A extends Annotation> A getAnnotation(Class<?> clz, Field field, Class<A> annotationClass) {
@@ -67,8 +69,8 @@ public class PreCompileAnnotation {
 
 	/**
 	 * Bean属性缓存
-	 * @param clz
-	 * @return
+	 * @param clz	Pojo class
+	 * @return		属性列表
 	 */
 	private BeanProperty getBeanProperty(Class<?> clz) {
 		BeanProperty bp = annotationCache.get(clz);
@@ -98,7 +100,7 @@ public class PreCompileAnnotation {
 	
 	/**
 	 * 实例
-	 * @return
+	 * @return	单例
 	 */
 	public static PreCompileAnnotation getInstance() {
 		if (instance == null) {

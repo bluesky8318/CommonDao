@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * 分页数据支持
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
- * @date 2012-3-29
  *
  */
 public class PaginationSupport<T> implements Serializable {

@@ -13,14 +13,12 @@ import cn.org.zeronote.orm.RowSelection;
 import cn.org.zeronote.orm.dao.ResultSetExtractor;
 import cn.org.zeronote.orm.dao.RowProcessor;
 
-
-
 /**
+ * 
  * Pojo装载器 带分页的
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
- * @date 2012-3-29
  *
- * @param <T>
+ * @param <T>	PO类型
  */
 public class PaginationPojoListResultSetExtractor<T> implements ResultSetExtractor<PaginationSupport<T>> {
 
@@ -29,8 +27,10 @@ public class PaginationPojoListResultSetExtractor<T> implements ResultSetExtract
 	private RowSelection rsl;
 	
 	private RowProcessor rowProcessor = new BaseRowProcessor();
+	
 	/**
-	 * 
+	 * @param cls	class
+	 * @param rsl	分页设置
 	 */
 	public PaginationPojoListResultSetExtractor(Class<T> cls, RowSelection rsl) {
 		this.pojoType = cls;

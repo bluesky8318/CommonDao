@@ -17,7 +17,7 @@ import cn.org.zeronote.orm.ORMHash;
 import cn.org.zeronote.orm.ORMTable;
 
 /**
- * UPDATE sql 语句生成器
+ * INSERT sql 语句生成器
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
  *
  */
@@ -39,7 +39,7 @@ public class SqlInsGenerator implements Generator {
 	
 	/**
 	 * 
-	 * @param pojoClazz
+	 * @param pojo	pojo
 	 */
 	public SqlInsGenerator(Object pojo) {
 		this.pojo = pojo;
@@ -47,10 +47,10 @@ public class SqlInsGenerator implements Generator {
 
 	/**
 	 * 生成主键依赖的
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException		exception 
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	private void generate() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		Class<?> pojoClazz = pojo.getClass();
@@ -74,9 +74,9 @@ public class SqlInsGenerator implements Generator {
 	
 	/**
 	 * 生成主键依赖的
-	 * @param tableName
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
+	 * @param tableName					表名
+	 * @throws IllegalAccessException 	exception
+	 * @throws IllegalArgumentException 	exception
 	 */
 	private void generate(String tableName) throws IllegalArgumentException, IllegalAccessException {
 		Class<?> pojoClazz = pojo.getClass();
@@ -135,11 +135,12 @@ public class SqlInsGenerator implements Generator {
 	}
 	
 	/**
+	 * 生成sql
 	 * @return the sql
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException		exception 
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	public String getSql() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		if (sql == null) {
@@ -149,11 +150,12 @@ public class SqlInsGenerator implements Generator {
 	}
 
 	/**
+	 * 生成sql的参数
 	 * @return the args
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 		exception
+	 * @throws IllegalArgumentException 	exception
+	 * @throws SecurityException 			exception
+	 * @throws NoSuchFieldException 		exception
 	 */
 	public Object[] getArgs() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		if (argsList == null) {

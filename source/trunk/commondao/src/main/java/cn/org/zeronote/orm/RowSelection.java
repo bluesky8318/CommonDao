@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * 用于分页查询中描述分页结构（如每页大小，起始页等信息）
  * @author <a href='mailto:lizheng8318@gmail.com'>lizheng</a>
- * @date 2012-3-29
  *
  */
 public class RowSelection implements Serializable {
@@ -78,10 +77,10 @@ public class RowSelection implements Serializable {
 	}
 	
 	/**
-	 * 表示本页包含的第一条记录的前一条记录在整个记录集中所处的位置。<br/>
-	 * 例如：分页大小为6，页码为4（实际代表第5页），则本页的第一条记录的前一条记录在整个记录集中的位置为：24。<br/>
-	 * RowSelection rowSelection = new RowSelection(4, 6);<br/>
-	 * assert rowSelection.getFirstRow()==24<br/>
+	 * 表示本页包含的第一条记录的前一条记录在整个记录集中所处的位置。<br>
+	 * 例如：分页大小为6，页码为4（实际代表第5页），则本页的第一条记录的前一条记录在整个记录集中的位置为：24。<br>
+	 * RowSelection rowSelection = new RowSelection(4, 6);<br>
+	 * assert rowSelection.getFirstRow()==24<br>
 	 * @return int
 	 */
 	public int getFirstRow(){
@@ -89,10 +88,10 @@ public class RowSelection implements Serializable {
 	}
 	
 	/**
-	 * 表示本页包含的最后一条记录在整个记录集中所处的位置。<br/>
-	 * 例如：分页大小为6，页码为4（实际代表第5页），则本页的最后一条记录在整个记录集中的位置为：30。<br/>
-	 * RowSelection rowSelection = new RowSelection(4, 6);<br/>
-	 * assert rowSelection.getLastRow()==30<br/>
+	 * 表示本页包含的最后一条记录在整个记录集中所处的位置。<br>
+	 * 例如：分页大小为6，页码为4（实际代表第5页），则本页的最后一条记录在整个记录集中的位置为：30。<br>
+	 * RowSelection rowSelection = new RowSelection(4, 6);<br>
+	 * assert rowSelection.getLastRow()==30<br>
 	 * @return int
 	 */
 	public int getLastRow(){
@@ -101,11 +100,10 @@ public class RowSelection implements Serializable {
 
 	/**
 	 * 排序字段名称，对应数据库中的列名
-	 * @return
+	 * @return	排序字段
 	 */
 	public String getOrder() {
 		return order;
 	}
-	
 	
 }

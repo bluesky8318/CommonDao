@@ -15,11 +15,11 @@ public interface RowProcessor {
 
 	/**
 	 * Rs的一条记录拼装成javabean
-	 * @param <T>
-	 * @param rs
-	 * @param clz
-	 * @return
-	 * @throws SQLException
+	 * @param <T>	PO类型
+	 * @param rs	原始结果集
+	 * @param clz	PO列席
+	 * @return		拼装后bean
+	 * @throws SQLException		数据访问异常
 	 */
 	<T> T toBean(ResultSet rs, Class<T> clz) throws SQLException;
 	

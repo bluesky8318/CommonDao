@@ -23,7 +23,7 @@ public class SimpListResultSetExtractor<T> implements ResultSetExtractor<List<T>
 	private Class<T> pojoType;
 	
 	/**
-	 * 
+	 * @param cls	class
 	 */
 	public SimpListResultSetExtractor(Class<T> cls) {
 		pojoType = cls;

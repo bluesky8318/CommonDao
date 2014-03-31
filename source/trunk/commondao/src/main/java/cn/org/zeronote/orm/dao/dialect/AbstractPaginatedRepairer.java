@@ -40,11 +40,13 @@ public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 
 	/**
 	 * 实际查询
-	 * @param sql
-	 * @param args
-	 * @param resultSetExtractor
-	 * @return
-	 * @throws DataAccessException
+	 * @param <T>					结果类型
+	 * @param dataSource			数据源
+	 * @param sql					查询语句
+	 * @param args					查询参数
+	 * @param resultSetExtractor	结果转换器
+	 * @return						查询结果
+	 * @throws DataAccessException	数据访问异常
 	 */
 	protected <T> T query(DataSource dataSource, String sql, Object[] args, ResultSetHandler<T> resultSetExtractor) throws DataAccessException {
 		QueryRunner qr = getPaginatedQueryRunner(dataSource);
@@ -58,7 +60,8 @@ public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 	
 	/**
 	 * 支持游标滚动的查询
-	 * @return
+	 * @param dataSource	数据源
+	 * @return		query runner
 	 */
 	protected QueryRunner getPaginatedQueryRunner(DataSource dataSource) {
 		if (queryRunner == null) {
@@ -77,8 +80,8 @@ public abstract class AbstractPaginatedRepairer implements IPaginatedRepairer {
 	
 	/**
 	 * 处理数据类型
-	 * @param args
-	 * @return
+	 * @param args	转换前参数
+	 * @return		转换后参数
 	 */
 	protected Object[] pearParams(Object[] args) {
 		Object[] nArgs = new Object[args.length];

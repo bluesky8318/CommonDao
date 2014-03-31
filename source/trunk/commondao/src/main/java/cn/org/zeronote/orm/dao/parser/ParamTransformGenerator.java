@@ -30,7 +30,8 @@ public class ParamTransformGenerator implements Generator {
 	private Object[] args;
 	
 	/**
-	 * 
+	 * @param sql			被解析的sql
+	 * @param params		被解析的sql的参数表
 	 */
 	public ParamTransformGenerator(String sql, Map<String, Object> params) {
 		this.oraSql = sql;
@@ -65,7 +66,7 @@ public class ParamTransformGenerator implements Generator {
 	
 	/**
 	 * 
-	 * @return
+	 * @return	返回构建之后的sql语句
 	 */
 	public String getSql() {
 		if (sql == null) {
@@ -76,7 +77,7 @@ public class ParamTransformGenerator implements Generator {
 
 	/**
 	 * 
-	 * @return
+	 * @return 返回构建之后的sql语句的参数
 	 */
 	public Object[] getArgs() {
 		if (args == null) {
