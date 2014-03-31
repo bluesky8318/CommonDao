@@ -3,6 +3,7 @@
  */
 package cn.org.zeronote.orm.dao.dialect;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class OraclePaginatedRepairer extends AbstractPaginatedRepairer {
 	 * 
 	 */
 	public OraclePaginatedRepairer() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -47,15 +47,15 @@ public class OraclePaginatedRepairer extends AbstractPaginatedRepairer {
 		StringBuilder nSql = new StringBuilder("select * from (");
 		nSql.append("select ROWNUM rw, mt.* from (")
 			.append(sql)
-			.append("ORDER BY ")
+			.append(" ORDER BY ")
 			.append(rowSelection.getOrder())
 			.append(") mt ");
 		nSql.append(") mst where mst.rw between ? and ? ");
 		
 		PaginationSupport<T> ps = new PaginationSupport<T>();
 		// 计算count
-		Integer count = query(dataSource, cSql.toString(), args, new ScalarHandler<Integer>());
-		ps.setTotalCount(count);
+		BigDecimal count = query(dataSource, cSql.toString(), args, new ScalarHandler<BigDecimal>());
+		ps.setTotalCount(count.intValue());
 		ps.setPageSize(rowSelection.getPageSize());
 		ps.setPageCount((int) (ps.getTotalCount() / ps.getPageSize() + (ps.getTotalCount() % ps.getPageSize() == 0 ? 0 : 1 )));
 		
