@@ -53,7 +53,7 @@ public class MSSqlServerRowNumberPaginatedRepairer extends AbstractPaginatedRepa
 		
 		PaginationSupport<T> ps = new PaginationSupport<T>();
 		// 计算count
-		Integer count = query(dataSource, sql, args, new ScalarHandler<Integer>());
+		Integer count = query(dataSource, cSql.toString(), args, new ScalarHandler<Integer>());
 		ps.setTotalCount(count);
 		ps.setPageSize(rowSelection.getPageSize());
 		ps.setPageCount((int) (ps.getTotalCount() / ps.getPageSize() + (ps.getTotalCount() % ps.getPageSize() == 0 ? 0 : 1 )));
@@ -74,7 +74,7 @@ public class MSSqlServerRowNumberPaginatedRepairer extends AbstractPaginatedRepa
 			nArgs[args.length] = ccr + 1;
 			nArgs[args.length + 1] = ccr + rowSelection.getPageSize();
 			
-			List<T> ls = query(dataSource, nSql.toString(), args, new PojoListResultSetExtractor<T>(pojoType));
+			List<T> ls = query(dataSource, nSql.toString(), nArgs, new PojoListResultSetExtractor<T>(pojoType));
 			ps.setObject(ls);
 		}
 		
