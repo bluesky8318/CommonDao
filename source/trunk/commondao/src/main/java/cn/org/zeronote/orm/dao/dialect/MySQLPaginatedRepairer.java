@@ -48,7 +48,7 @@ public class MySQLPaginatedRepairer extends AbstractPaginatedRepairer {
 		
 		PaginationSupport<T> ps = new PaginationSupport<T>();
 		// 计算count
-		Integer count = query(dataSource, cSql.toString(), args, new ScalarHandler<Integer>());
+		Long count = query(dataSource, cSql.toString(), args, new ScalarHandler<Long>());
 		ps.setTotalCount(count);
 		ps.setPageSize(rowSelection.getPageSize());
 		ps.setPageCount((int) (ps.getTotalCount() / ps.getPageSize() + (ps.getTotalCount() % ps.getPageSize() == 0 ? 0 : 1 )));
