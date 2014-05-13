@@ -3,17 +3,15 @@
  */
 package cn.org.zeronote.orm.dao.dialect;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.apache.commons.dbutils.handlers.ScalarHandler;
-
 import cn.org.zeronote.orm.DataAccessException;
 import cn.org.zeronote.orm.PaginationSupport;
 import cn.org.zeronote.orm.RowSelection;
 import cn.org.zeronote.orm.extractor.PojoListResultSetExtractor;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SQL Server使用top进行分页
@@ -71,8 +69,8 @@ public class MSSqlServerRowNumberPaginatedRepairer extends AbstractPaginatedRepa
 			for (int i = 0; i < args.length; i++) {
 				nArgs[i] = args[i];
 			}
-			nArgs[args.length] = ccr + 1;
-			nArgs[args.length + 1] = ccr + rowSelection.getPageSize();
+			nArgs[args.length] = ccr ;
+			nArgs[args.length + 1] = ccr + rowSelection.getPageSize() - 1;
 			
 			List<T> ls = query(dataSource, nSql.toString(), nArgs, new PojoListResultSetExtractor<T>(pojoType));
 			ps.setObject(ls);
