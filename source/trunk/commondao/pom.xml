@@ -237,6 +237,7 @@
 				<configuration>
 					<encoding>UTF-8</encoding>
 					<attach>true</attach>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 				<executions>
 					<execution>
