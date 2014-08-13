@@ -35,9 +35,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.6</java-version>
-		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
-		<org.slf4j-version>1.7.6</org.slf4j-version>
-		<ch.qos-version>1.1.1</ch.qos-version>
+		<org.springframework-version>4.0.6.RELEASE</org.springframework-version>
+		<org.slf4j-version>1.7.7</org.slf4j-version>
+		<ch.qos-version>1.1.2</ch.qos-version>
 	</properties>
 
 	<repositories>
@@ -54,10 +54,17 @@
 	</repositories>
 
 	<dependencies>
+		<!-- log -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
-			<version>1.5</version>
+			<version>1.6</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- 使用redis必须的依赖 -->
@@ -66,12 +73,6 @@
 			<artifactId>jedis</artifactId>
 			<version>2.1.0</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
-			<scope>compile</scope>
 		</dependency>
 		<!-- 使用JdbcTxCommonDao必须的依赖 -->
 		<dependency>
@@ -86,6 +87,20 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<!-- jotm 事务处理支持 -->
+		<dependency>
+			<groupId>org.ow2.jotm</groupId>
+			<artifactId>jotm-core</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- 数据库驱动 -->
 		<dependency>
@@ -114,13 +129,6 @@
 			<artifactId>druid</artifactId>
 			<version>0.2.23</version>
 			<scope>test</scope>
-		</dependency>
-		<!-- jotm 事务处理支持 -->
-		<dependency>
-			<groupId>org.ow2.jotm</groupId>
-			<artifactId>jotm-core</artifactId>
-			<version>2.2.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ow2.jotm</groupId>
@@ -152,13 +160,7 @@
 			<groupId>com.atomikos</groupId>
 			<artifactId>transactions-jdbc-deprecated</artifactId>
 			<version>3.8.0</version>
-		</dependency>
-		<!-- log -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -172,7 +174,6 @@
 			<version>${org.slf4j-version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
