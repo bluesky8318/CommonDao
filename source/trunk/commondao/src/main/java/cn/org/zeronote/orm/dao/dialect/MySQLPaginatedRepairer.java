@@ -42,6 +42,8 @@ public class MySQLPaginatedRepairer extends AbstractPaginatedRepairer {
 		StringBuilder nSql = new StringBuilder(sql);
 		nSql.append(" ORDER BY ")
 			.append(rowSelection.getOrder())
+			.append(" ")
+			.append(rowSelection.getSort().getValue())
 			.append(" limit ?, ?");
 		
 		PaginationSupport<T> ps = new PaginationSupport<T>();

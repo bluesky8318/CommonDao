@@ -27,6 +27,9 @@ public class RowSelection implements Serializable {
 	
 	/** 排序字段名称，对应数据库中的列名 */
 	private String order;
+	
+	/** 排序 */
+	private Sort sort = Sort.DESC;
 
 	/**
 	 * 构造方法，没有分页排序字段，有些数据库不支持
@@ -58,6 +61,25 @@ public class RowSelection implements Serializable {
 		this.lastRow = firstRow + pageSize;
 		
 		this.order = order;
+	}
+	
+	/**
+	 * 构造方法
+	 * @param startPage 0代表第一页，依次类推
+	 * @param pageSize 每页包含的记录数
+	 * @param order 分页用排序字段名称
+	 * @param sort 排序
+	 */
+	public RowSelection(int startPage, int pageSize, String order, Sort sort) {
+		this.startPage = startPage;
+		this.pageSize = pageSize;
+		this.firstRow = startPage*pageSize;
+		this.lastRow = firstRow + pageSize;
+		
+		this.order = order;
+		if (sort != null) {
+			this.sort = sort;
+		}
 	}
 
 	/**
@@ -105,5 +127,12 @@ public class RowSelection implements Serializable {
 	public String getOrder() {
 		return order;
 	}
-	
+
+	/**
+	 * 排序，默认是desc
+	 * @return the sort
+	 */
+	public Sort getSort() {
+		return sort;
+	}
 }

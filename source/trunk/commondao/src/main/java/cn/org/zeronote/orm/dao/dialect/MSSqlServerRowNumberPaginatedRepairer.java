@@ -44,6 +44,8 @@ public class MSSqlServerRowNumberPaginatedRepairer extends AbstractPaginatedRepa
 		StringBuilder nSql = new StringBuilder("select * from (");
 		nSql.append("select *, ROW_NUMBER() OVER (ORDER BY ")
 			.append(rowSelection.getOrder())
+			.append(" ")
+			.append(rowSelection.getSort().getValue())
 			.append(") as rank from (")
 			.append(sql)
 			.append(") as mt");

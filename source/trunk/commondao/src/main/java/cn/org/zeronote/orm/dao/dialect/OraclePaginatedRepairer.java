@@ -47,6 +47,8 @@ public class OraclePaginatedRepairer extends AbstractPaginatedRepairer {
 			.append(sql)
 			.append(" ORDER BY ")
 			.append(rowSelection.getOrder())
+			.append(" ")
+			.append(rowSelection.getSort().getValue())
 			.append(") mt ");
 		nSql.append(") mst where mst.rw between ? and ? ");
 		
