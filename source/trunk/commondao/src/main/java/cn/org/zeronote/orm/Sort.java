@@ -10,9 +10,9 @@ package cn.org.zeronote.orm;
  */
 public enum Sort {
 
-	/** 升序 */
-	DESC("desc"),
 	/** 降序 */
+	DESC("desc"),
+	/** 升序 */
 	ASC("asc");
 	
 	/** 描述字符串 */

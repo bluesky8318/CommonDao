@@ -29,7 +29,7 @@ public class RowSelection implements Serializable {
 	private String order;
 	
 	/** 排序 */
-	private Sort sort = Sort.DESC;
+	private Sort sort = Sort.ASC;
 
 	/**
 	 * 构造方法，没有分页排序字段，有些数据库不支持
