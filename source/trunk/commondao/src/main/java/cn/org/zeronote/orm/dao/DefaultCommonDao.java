@@ -621,7 +621,12 @@ public class DefaultCommonDao implements ICommonDao {
 					}
 				}
 				for (int i : ii) {
-					r += i;
+					if (DBType.MYSQL.equals(this.dbType)) {
+						// mysql insert 成功，则返回-2，其它数据库未知
+						r += (i == -2 ? 1 : 0);
+					} else {
+						r += i;
+					}
 				}
 			}
 		} finally {
