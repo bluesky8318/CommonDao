@@ -24,6 +24,9 @@ public class Column {
 	/** 默认值 */
 	private String def;
 	
+	/** 注释 */
+	private String remarks;
+	
 	/**
 	 * 
 	 */
@@ -109,5 +112,19 @@ public class Column {
 	 */
 	public void setDef(String def) {
 		this.def = def;
+	}
+
+	/**
+	 * @return the remarks
+	 */
+	public String getRemarks() {
+		return remarks;
+	}
+
+	/**
+	 * @param remarks the remarks to set
+	 */
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 }

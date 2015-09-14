@@ -14,6 +14,8 @@ public class Table {
 
 	/**表名称*/
 	private String tableName;
+	/** 注释 */
+	private String remarks;
 	/**字段*/
 	private List<Column> columns;
 	
@@ -52,5 +54,19 @@ public class Table {
 	 */
 	public void setColumns(List<Column> columns) {
 		this.columns = columns;
+	}
+
+	/**
+	 * @return the remarks
+	 */
+	public String getRemarks() {
+		return remarks;
+	}
+
+	/**
+	 * @param remarks the remarks to set
+	 */
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 }

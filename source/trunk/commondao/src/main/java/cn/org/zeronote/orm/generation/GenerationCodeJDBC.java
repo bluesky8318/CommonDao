@@ -139,7 +139,9 @@ public class GenerationCodeJDBC implements IGenerationCode {
 				.append("import cn.org.zeronote.orm.ORMColumn;\n")
 				.append("import cn.org.zeronote.orm.ORMTable;\n")
 				.append("\n\n")
-				.append("/**\n * Auto Generat Code by system\n *\n */\n")
+				.append("/**\n * Auto Generat Code by system\n")
+				.append(" * ").append(table.getRemarks()).append("\n")
+				.append(" *\n */\n")
 				.append("@ORMAutoAssemble\n");
 			// tableName
 			writeStr.append("@ORMTable(tableName = \"").append(table.getTableName()).append("\")\n");
@@ -150,6 +152,10 @@ public class GenerationCodeJDBC implements IGenerationCode {
 			// columns
 			StringBuilder sgStr = new StringBuilder();	// get/set方法
 			for (Column column : table.getColumns()) {
+				if (column.getRemarks() != null && !"".equalsIgnoreCase(column.getRemarks().trim())) {
+					writeStr.append("\t")
+						.append("/** ").append(column.getRemarks()).append(" */\n");
+				}
 				writeStr.append("\t")
 					.append("@ORMColumn(value = \"").append(column.getName()).append("\"");
 				if (column.isPrimaryKey()) {
@@ -246,6 +252,7 @@ public class GenerationCodeJDBC implements IGenerationCode {
 			while (rs.next()) {
 				Table t = new Table();
 				t.setTableName(rs.getString("TABLE_NAME"));
+				t.setRemarks(rs.getString("REMARKS"));
 				logger.info("tableName:{}", t.getTableName());
 				tables.add(t);
 			}
@@ -280,6 +287,8 @@ public class GenerationCodeJDBC implements IGenerationCode {
 					}
 					c.setDef(rs.getString("COLUMN_DEF"));	// 默认值
 					c.setAutoIncrement("YES".equals(rs.getString("IS_AUTOINCREMENT")));
+					
+					c.setRemarks(rs.getString("REMARKS"));	// 注释
 					logger.info("tableName:{}; column:{}", table.getTableName(), c.getName());
 					table.getColumns().add(c);
 				}
